@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f1f5f2">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Area riservata · MemoryLeakers</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preload" href="fonts/fraunces-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+  <a class="skip" href="#contenuto">Vai al contenuto</a>
+  <header class="nav" id="top">
+    <a class="brand" href="index.html"><img src="img/logo-mark.png" alt="" width="20" height="34"><span>Memory<b>Leakers</b></span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav aria-label="Principale" id="menu">
+      <ul>
+        <li><a href="index.html#candidatura">Candidatura</a></li>
+        <li><a href="index.html#rtb">RTB</a></li>
+        <li><a href="index.html#poc">PoC</a></li>
+        <li><a href="index.html#pb">PB</a></li>
+        <li><a href="glossario.html">Glossario</a></li>
+        <li><a href="chi-siamo.html">Chi siamo</a></li>
+        <li><a href="contatti.html">Contatti</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page admin" id="contenuto" tabindex="-1">
+    <div class="eyebrow">Area riservata</div>
+    <h1 class="page-title">Pannello di gestione</h1>
+
+    <noscript><p class="empty">Il pannello richiede JavaScript.</p></noscript>
+
+    <!-- ACCESSO -->
+    <section id="login" class="card" aria-labelledby="h-login">
+      <h2 id="h-login" class="card-title">Accedi con GitHub</h2>
+      <p>Le modifiche vengono salvate direttamente nel repository del sito (un commit), e il sito si aggiorna da solo in uno o due minuti. Possono farlo solo i componenti con permesso di scrittura sul repository: per entrare serve un <i lang="en">token</i> personale di GitHub, che resta nel tuo browser e non viene mai salvato nel sito.</p>
+      <form id="login-form" class="form" autocomplete="off">
+        <label>Repository<input id="f-repo" value="MemoryLeakersTeam/MemoryLeakersTeam.github.io" required spellcheck="false"></label>
+        <label>Ramo<input id="f-branch" value="main" required spellcheck="false"></label>
+        <label>Token di accesso<input id="f-token" type="password" required autocomplete="off" spellcheck="false" aria-describedby="token-hint"></label>
+        <p id="token-hint" class="hint">Non verrà mostrato né salvato, a meno che tu non scelga di ricordarlo qui sotto.</p>
+        <label class="check"><input id="f-remember" type="checkbox"> Ricorda il token finché non chiudo questa scheda</label>
+        <button class="btn" type="submit">Accedi</button>
+      </form>
+      <p id="login-msg" class="msg" role="alert"></p>
+      <details class="help">
+        <summary>Come creo il token?</summary>
+        <ol>
+          <li>Su GitHub vai in <b>Settings → Developer settings → Personal access tokens → Fine-grained tokens</b> e scegli <b>Generate new token</b>.</li>
+          <li><b>Repository access</b>: <i>Only select repositories</i> e scegli solo il repository del sito.</li>
+          <li><b>Permissions → Repository permissions → Contents</b>: <i>Read and write</i>.</li>
+          <li>Imposta una scadenza breve (per esempio 30 giorni), genera il token e incollalo qui sopra.</li>
+        </ol>
+        <p>Non condividere il token con nessuno: chi lo ha può modificare il repository.</p>
+      </details>
+    </section>
+
+    <!-- PANNELLO -->
+    <div id="panel" hidden>
+      <div class="admin-bar">
+        <p id="who" class="who"></p>
+        <div class="bar-actions">
+          <button type="button" class="btn" id="btn-save" disabled>Salva e pubblica</button>
+          <button type="button" class="btn ghost" id="btn-discard" disabled>Annulla modifiche</button>
+          <button type="button" class="btn ghost" id="btn-logout">Esci</button>
+        </div>
+      </div>
+      <p id="save-msg" class="msg" role="status" aria-live="polite"></p>
+
+      <div class="tabs" role="tablist" aria-label="Sezioni da gestire" id="tabs">
+        <button role="tab" type="button" id="t-docs" aria-controls="p-docs" aria-selected="true">Documenti</button>
+        <button role="tab" type="button" id="t-glo" aria-controls="p-glo" aria-selected="false" tabindex="-1">Glossario</button>
+        <button role="tab" type="button" id="t-mem" aria-controls="p-mem" aria-selected="false" tabindex="-1">Componenti</button>
+        <button role="tab" type="button" id="t-con" aria-controls="p-con" aria-selected="false" tabindex="-1">Contatti</button>
+      </div>
+
+      <!-- DOCUMENTI -->
+      <section role="tabpanel" id="p-docs" aria-labelledby="t-docs" tabindex="0">
+        <div class="card">
+          <h2 class="card-title" id="doc-form-title">Aggiungi un documento</h2>
+          <form id="doc-form" class="form" autocomplete="off">
+            <label>Tappa
+              <select id="d-baseline"></select>
+            </label>
+            <label>Categoria
+              <select id="d-cat" required></select>
+            </label>
+            <label>Titolo
+              <input id="d-name" required maxlength="120" placeholder="Per esempio: Analisi dei Requisiti">
+            </label>
+            <label>Data <span class="opt">(facoltativa)</span>
+              <input id="d-date" type="date">
+            </label>
+            <fieldset>
+              <legend>Dove si trova il documento</legend>
+              <label class="check"><input type="radio" name="d-src" value="file" checked> Carica un file PDF</label>
+              <label class="check"><input type="radio" name="d-src" value="url"> Link esterno</label>
+              <div id="src-file"><label>File PDF<input id="d-file" type="file" accept="application/pdf,.pdf"></label>
+                <p class="hint" id="d-file-hint">Il file viene salvato nel repository in <code>pdf/tappa/categoria/</code>. Massimo 25 MB.</p></div>
+              <div id="src-url" hidden><label>Indirizzo<input id="d-url" type="url" placeholder="https://…"></label></div>
+            </fieldset>
+            <div class="row">
+              <button class="btn" type="submit" id="doc-submit">Aggiungi documento</button>
+              <button class="btn ghost" type="button" id="doc-cancel" hidden>Annulla modifica</button>
+            </div>
+          </form>
+          <p id="doc-msg" class="msg" role="alert"></p>
+        </div>
+        <h2 class="card-title" id="doc-list-title">Documenti pubblicati</h2>
+        <div id="doc-list"></div>
+      </section>
+
+      <!-- GLOSSARIO -->
+      <section role="tabpanel" id="p-glo" aria-labelledby="t-glo" tabindex="0" hidden>
+        <div class="card">
+          <h2 class="card-title" id="g-form-title">Aggiungi un termine</h2>
+          <form id="g-form" class="form" autocomplete="off">
+            <label>Termine<input id="g-term" required maxlength="80"></label>
+            <label>Definizione<textarea id="g-def" required rows="3" maxlength="500"></textarea></label>
+            <label class="check"><input id="g-en" type="checkbox"> Il termine è in inglese</label>
+            <div class="row">
+              <button class="btn" type="submit" id="g-submit">Aggiungi termine</button>
+              <button class="btn ghost" type="button" id="g-cancel" hidden>Annulla modifica</button>
+            </div>
+          </form>
+        </div>
+        <h2 class="card-title">Termini nel glossario</h2>
+        <div id="g-list"></div>
+      </section>
+
+      <!-- COMPONENTI -->
+      <section role="tabpanel" id="p-mem" aria-labelledby="t-mem" tabindex="0" hidden>
+        <p class="hint">Email e GitHub compaiono nella pagina Contatti, quindi inserisci solo i recapiti che il componente ha scelto di rendere pubblici.</p>
+        <div class="card">
+          <h2 class="card-title" id="m-form-title">Aggiungi un componente</h2>
+          <form id="m-form" class="form" autocomplete="off">
+            <label>Nome e cognome<input id="m-name" required maxlength="80"></label>
+            <label>Ruolo <span class="opt">(facoltativo)</span><input id="m-role" maxlength="60"></label>
+            <label>Email <span class="opt">(facoltativa)</span><input id="m-email" type="email"></label>
+            <label>Nome utente GitHub <span class="opt">(facoltativo)</span><input id="m-github" maxlength="39" pattern="[A-Za-z0-9](?:[A-Za-z0-9\-]*[A-Za-z0-9])?" spellcheck="false"></label>
+            <div class="row">
+              <button class="btn" type="submit" id="m-submit">Aggiungi componente</button>
+              <button class="btn ghost" type="button" id="m-cancel" hidden>Annulla modifica</button>
+            </div>
+          </form>
+        </div>
+        <h2 class="card-title">Componenti del gruppo</h2>
+        <div id="m-list"></div>
+      </section>
+
+      <!-- CONTATTI -->
+      <section role="tabpanel" id="p-con" aria-labelledby="t-con" tabindex="0" hidden>
+        <div class="card">
+          <h2 class="card-title" id="c-form-title">Aggiungi un contatto del gruppo</h2>
+          <form id="c-form" class="form" autocomplete="off">
+            <label>Etichetta<input id="c-label" required maxlength="60" placeholder="Per esempio: Email"></label>
+            <label>Testo mostrato<input id="c-value" required maxlength="120" placeholder="Per esempio: gruppo@example.com"></label>
+            <label>Link<input id="c-url" required placeholder="mailto:… oppure https://…"></label>
+            <div class="row">
+              <button class="btn" type="submit" id="c-submit">Aggiungi contatto</button>
+              <button class="btn ghost" type="button" id="c-cancel" hidden>Annulla modifica</button>
+            </div>
+          </form>
+        </div>
+        <h2 class="card-title">Contatti del gruppo</h2>
+        <div id="c-list"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer><p>© 2026 MemoryLeakers</p></footer>
+
+  <script src="data/site-data.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
