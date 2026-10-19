@@ -82,34 +82,14 @@ window.SITE_DATA = {
   ],
   "members": [
     {
-      "name": "Matteo Arcandi",
-      "github": "",
-      "email": ""
-    },
-    {
-      "name": "Jacopo De Donà",
-      "github": "",
-      "email": ""
-    },
-    {
-      "name": "Jacopo Franco",
-      "github": "",
-      "email": ""
-    },
-    {
       "name": "Matteo Marcon",
       "github": "Matteomarcon",
       "email": ""
     },
     {
-      "name": "Riccardo Peresson",
-      "github": "",
-      "email": ""
-    },
-    {
-      "name": "Paolo Prevedello Ramirez",
-      "github": "",
-      "email": ""
+      "name": "Matteo Arcandi",
+      "github": "ttteo",
+      "email": "matteo.arcandi@studenti.unipd.it"
     },
     {
       "name": "Chiara Protopapa",
