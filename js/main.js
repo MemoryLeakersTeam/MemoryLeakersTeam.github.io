@@ -17,7 +17,7 @@
   const tl = $("timeline");
   if (tl) {
     const cats = data.categories || [];
-    tl.innerHTML = data.baselines.map((b, i) => {
+    tl.innerHTML = data.baselines.filter((b) => b.visible !== false).map((b, i) => {
       const items = b.items || [];
       const order = [...cats, ...new Set(items.map((x) => x.cat).filter((c) => !cats.includes(c)))];
       const body = order.map((c) => {

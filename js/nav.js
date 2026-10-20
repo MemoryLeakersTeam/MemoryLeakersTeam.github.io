@@ -13,6 +13,13 @@
     });
   }
 
+  // le tappe nascoste dal pannello admin spariscono anche dal menu
+  const hidden = ((window.SITE_DATA && window.SITE_DATA.baselines) || []).filter((b) => b.visible === false).map((b) => b.id);
+  document.querySelectorAll("#menu a").forEach((a) => {
+    const m = (a.getAttribute("href") || "").match(/#([\w-]+)$/);
+    if (m && hidden.includes(m[1])) a.closest("li").remove();
+  });
+
   const onScroll = () => header && header.classList.toggle("scrolled", scrollY > 8);
   addEventListener("scroll", onScroll, { passive: true }); onScroll();
 

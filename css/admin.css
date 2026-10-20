@@ -11,7 +11,7 @@ h2.card-title:not(.card h2) { margin-top: 34px; }
 .form input[type=file] { padding: 8px; }
 .form input:focus-visible, .form select:focus-visible, .form textarea:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 1px; }
 .form .check { display: flex; align-items: center; gap: 10px; min-height: 28px; }
-.form .check input { width: 20px; height: 20px; accent-color: var(--accent-text); flex: none; }
+.form .check input { width: 24px; height: 24px; accent-color: var(--accent-text); flex: none; }
 fieldset { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px 16px; display: grid; gap: 10px; }
 legend { padding: 0 6px; font-size: .92rem; }
 .opt { color: var(--muted); font-size: .85rem; }
@@ -43,3 +43,7 @@ code { background: rgba(38,57,58,.08); padding: 1px 6px; border-radius: 6px; fon
 .item .meta .tag { background: rgba(79,138,132,.16); color: var(--accent-text); border-radius: 99px; padding: 1px 9px; margin-left: 6px; }
 .item .actions { display: flex; flex-wrap: wrap; gap: 6px; }
 .list-group { font-size: .78rem; text-transform: uppercase; letter-spacing: .13em; color: var(--muted); margin: 18px 0 6px; }
+
+.vis { border: 0; padding: 0; display: grid; gap: 6px; }
+.vis .check { display: flex; align-items: center; gap: 10px; min-height: 36px; cursor: pointer; }
+.vis input { width: 24px; height: 24px; accent-color: var(--accent-text); flex: none; }

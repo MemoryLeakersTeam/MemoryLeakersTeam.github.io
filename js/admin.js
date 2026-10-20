@@ -51,7 +51,7 @@
 
   const normalize = (d) => {
     d.categories ||= ["Generale", "Documenti esterni", "Documenti interni", "Verbali esterni", "Verbali interni", "Diapositive"];
-    d.baselines ||= []; d.baselines.forEach((b) => (b.items ||= []));
+    d.baselines ||= []; d.baselines.forEach((b) => { b.items ||= []; b.visible ??= true; });
     d.glossary ||= []; d.members ||= []; d.contacts ||= [];
     return d;
   };
@@ -148,7 +148,7 @@
   const curBaseline = () => data.baselines.find((b) => b.id === $("d-baseline").value) || data.baselines[0];
   function fillSelects() {
     const keep = $("d-baseline").value, keepCat = $("d-cat").value;
-    $("d-baseline").replaceChildren(...data.baselines.map((b) => el("option", { value: b.id }, b.title)));
+    $("d-baseline").replaceChildren(...data.baselines.map((b) => el("option", { value: b.id }, b.title + (b.visible ? "" : " (nascosta)"))));
     $("d-cat").replaceChildren(...data.categories.map((c) => el("option", { value: c }, c)));
     if (keep && data.baselines.some((b) => b.id === keep)) $("d-baseline").value = keep;
     if (keepCat) $("d-cat").value = keepCat;
@@ -160,7 +160,7 @@
   function renderDocs() {
     fillSelects();
     const b = curBaseline(), box = $("doc-list"); box.replaceChildren();
-    $("doc-list-title").textContent = `Documenti pubblicati · ${b.title}`;
+    $("doc-list-title").textContent = `Documenti pubblicati · ${b.title}` + (b.visible ? "" : " (tappa nascosta: non visibile sul sito)");
     const cats = [...data.categories, ...new Set(b.items.map((i) => i.cat).filter((c) => !data.categories.includes(c)))];
     let any = false;
     for (const c of cats) {
@@ -175,6 +175,14 @@
     }
     if (!any) box.append(emptyNote("Nessun documento in questa tappa."));
     updateDirty();
+  }
+  function renderVisibility() {
+    $("vis-list").replaceChildren($("vis-list").firstElementChild, ...data.baselines.map((b) => {
+      const cb = el("input", { type: "checkbox", id: "vis-" + b.id });
+      cb.checked = b.visible;
+      cb.addEventListener("change", () => { b.visible = cb.checked; renderDocs(); updateDirty(); });
+      return el("label", { class: "check", for: "vis-" + b.id }, cb, `${b.title}`, el("span", { class: "opt" }, ` · ${b.items.length} ${b.items.length === 1 ? "documento" : "documenti"}`));
+    }));
   }
   $("d-baseline").addEventListener("change", renderDocs);
   document.querySelectorAll("input[name=d-src]").forEach((r) => r.addEventListener("change", () => {
@@ -287,7 +295,7 @@
   });
 
   function resetForms() { resetDocForm(); glo.reset(); mem.reset(); con.reset(); }
-  function renderAll() { renderDocs(); glo.render(); mem.render(); con.render(); }
+  function renderAll() { renderVisibility(); renderDocs(); glo.render(); mem.render(); con.render(); }
 
   /* ---------- riaccesso nella stessa scheda ---------- */
   try { const s = JSON.parse(sessionStorage.getItem(STORE) || "null"); if (s) { $("f-repo").value = s.repo; $("f-branch").value = s.branch; login(s, true); } } catch { /* ignora */ }

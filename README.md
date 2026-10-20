@@ -25,6 +25,7 @@ Aprire `admin.html` (link «Area riservata» nel footer). Serve un token persona
 - I PDF caricati finiscono in `pdf/<tappa>/<categoria>/<nome-file>.pdf` (come nel sito di esempio) e vengono collegati nella tappa scelta.
 - In alternativa si può indicare un link esterno.
 - Il token resta nel browser di chi lo inserisce e viene inviato solo a `api.github.com`. Non condividerlo e usa una scadenza breve.
+- Dalla scheda **Documenti** si sceglie quali tappe mostrare: all'inizio è visibile solo la Candidatura; RTB, PoC e PB si attivano con l'avanzare delle attività (le tappe nascoste spariscono anche dal menu, i loro documenti restano salvati).
 - Tutti i dati stanno in `data/site-data.js`: il pannello lo riscrive, ma si può anche modificare a mano (formato JSON).
 
 ## Controlli
