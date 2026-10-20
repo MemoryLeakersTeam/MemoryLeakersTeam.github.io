@@ -24,7 +24,7 @@ window.SITE_DATA = {
       "titleLang": "en",
       "sub": "RTB: requisiti e tecnologie",
       "items": [],
-      "visible": false
+      "visible": true
     },
     {
       "id": "poc",
@@ -124,8 +124,8 @@ window.SITE_DATA = {
   "contacts": [
     {
       "label": "Email",
-      "value": "MemoryLeakersTeam@gmail.com",
-      "url": "mailto:MemoryLeakersTeam@gmail.com"
+      "value": "memoryleakersteam@gmail.com",
+      "url": "mailto:memoryleakersteam@gmail.com"
     },
     {
       "label": "GitHub",
