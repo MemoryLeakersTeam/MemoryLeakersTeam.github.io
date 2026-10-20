@@ -16,7 +16,7 @@
 <body>
   <a class="skip" href="#contenuto">Vai al contenuto</a>
   <header class="nav" id="top">
-    <a class="brand" href="index.html"><img src="img/logo-mark.png" alt="" width="20" height="34"><span>Memory<b>Leakers</b></span></a>
+    <a class="brand" href="index.html"><img src="img/logo-mark.png" alt="" width="23" height="34"><span>Memory<b>Leakers</b></span></a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
     <nav aria-label="Principale" id="menu">
       <ul>
@@ -105,10 +105,15 @@
             </label>
             <fieldset>
               <legend>Dove si trova il documento</legend>
-              <label class="check"><input type="radio" name="d-src" value="file" checked> Carica un file PDF</label>
+              <label class="check"><input type="radio" name="d-src" value="repo" checked> PDF già presente nel repository</label>
               <label class="check"><input type="radio" name="d-src" value="url"> Link esterno</label>
-              <div id="src-file"><label>File PDF<input id="d-file" type="file" accept="application/pdf,.pdf"></label>
-                <p class="hint" id="d-file-hint">Il file viene salvato nel repository in <code>pdf/tappa/categoria/</code>. Massimo 25 MB.</p></div>
+              <div id="src-repo">
+                <label>File PDF
+                  <select id="d-repofile"></select>
+                </label>
+                <p class="hint" id="d-repo-hint">I PDF si caricano a mano nella cartella <code>pdf/</code> del repository (per esempio in <code>pdf/rtb/documenti-esterni/</code>) e poi si collegano qui.</p>
+                <button type="button" class="btn ghost small" id="d-refresh">Aggiorna l'elenco dei PDF</button>
+              </div>
               <div id="src-url" hidden><label>Indirizzo<input id="d-url" type="url" placeholder="https://…"></label></div>
             </fieldset>
             <div class="row">

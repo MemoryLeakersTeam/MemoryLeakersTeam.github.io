@@ -22,7 +22,7 @@ poi aprire <http://localhost:8000>. Serve un server: aprendo i file direttamente
 
 Aprire `admin.html` (link «Area riservata» nel footer). Serve un token personale di GitHub con permesso **Contents: Read and write** solo su questo repository (guida nella pagina stessa). Il pannello salva i cambiamenti con un commit sul ramo `main`: il workflow `pages.yml` parte da solo e il sito si aggiorna in 1–2 minuti.
 
-- I PDF caricati finiscono in `pdf/<tappa>/<categoria>/<nome-file>.pdf` (come nel sito di esempio) e vengono collegati nella tappa scelta.
+- **I PDF si inseriscono a mano**: si copiano nella cartella `pdf/` del repository (per esempio `pdf/rtb/documenti-esterni/nome.pdf`, con `git` o dal sito di GitHub) e poi, dal pannello, si sceglie il file dall'elenco e lo si collega a una tappa e a una categoria. Il pannello non carica file.
 - In alternativa si può indicare un link esterno.
 - Il token resta nel browser di chi lo inserisce e viene inviato solo a `api.github.com`. Non condividerlo e usa una scadenza breve.
 - Dalla scheda **Documenti** si sceglie quali tappe mostrare: all'inizio è visibile solo la Candidatura; RTB, PoC e PB si attivano con l'avanzare delle attività (le tappe nascoste spariscono anche dal menu, i loro documenti restano salvati).

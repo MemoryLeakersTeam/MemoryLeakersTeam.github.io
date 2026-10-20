@@ -194,7 +194,7 @@ main:focus { outline: none; }
 }
 
 /* ---------- logo, pulsanti ---------- */
-.hero-logo { display: block; width: min(340px, 62vw); height: auto; margin: 0 auto; }
+.hero-logo { display: block; width: min(420px, 72vw); height: auto; margin: 0 auto; }
 .hero-text h1 { font-size: 0; line-height: 0; }
 .motion-btn { position: absolute; right: clamp(16px, 4vw, 40px); bottom: 22px; margin: 0; z-index: 2; }
 .hero-text { pointer-events: none; }

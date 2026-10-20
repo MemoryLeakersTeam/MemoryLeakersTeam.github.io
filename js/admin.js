@@ -12,18 +12,15 @@
     kids.flat().forEach((c) => n.append(c));
     return n;
   };
-  const MAX_MB = 25, STORE = "ml-admin";
+  const STORE = "ml-admin";
   let cfg = null, data = null, original = "", sha = null;
-  const pending = new Map(); // percorso nel repo -> File da caricare
+  let repoPdfs = []; // PDF presenti nella cartella pdf/ del repository
   let docEdit = null;
 
   /* ---------- utilità ---------- */
-  const slug = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z0-9._-]+/g, "-").replace(/-+/g, "-").replace(/^[-.]+|[-.]+$/g, "");
-  const encPath = (p) => p.split("/").map(encodeURIComponent).join("/");
   const bytesToB64 = (bytes) => { let s = ""; for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000)); return btoa(s); };
   const textToB64 = (t) => bytesToB64(new TextEncoder().encode(t));
   const b64ToText = (b) => new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\s/g, "")), (c) => c.charCodeAt(0)));
-  const fileToB64 = async (f) => bytesToB64(new Uint8Array(await f.arrayBuffer()));
   const serialize = (d) => "/* File gestito dal pannello admin (admin.html): puoi anche modificarlo a mano, ma rispetta il formato JSON. */\nwindow.SITE_DATA = " + JSON.stringify(d, null, 2) + ";\n";
   const parse = (t) => JSON.parse(t.match(/window\.SITE_DATA\s*=\s*(\{[\s\S]*\})\s*;?\s*$/)[1]);
   const setMsg = (node, text, kind = "") => { node.textContent = text; node.className = "msg" + (kind ? " " + kind : ""); };
@@ -55,7 +52,7 @@
     d.glossary ||= []; d.members ||= []; d.contacts ||= [];
     return d;
   };
-  const dirty = () => JSON.stringify(data) !== original || pending.size > 0;
+  const dirty = () => JSON.stringify(data) !== original;
   function updateDirty() {
     const d = dirty();
     $("btn-save").disabled = !d; $("btn-discard").disabled = !d;
@@ -72,7 +69,14 @@
       if (e.status !== 404) throw e;
       sha = null; data = normalize(structuredClone(window.SITE_DATA)); // primo salvataggio: parte dai dati del sito
     }
-    original = JSON.stringify(data); pending.clear();
+    original = JSON.stringify(data);
+  }
+  async function loadPdfList() {
+    try {
+      const t = await api(`/repos/${cfg.repo}/git/trees/${encodeURIComponent(cfg.branch)}?recursive=1`);
+      repoPdfs = t.tree.filter((x) => x.type === "blob" && /^pdf\/.+\.pdf$/i.test(x.path)).map((x) => x.path).sort((a, b) => a.localeCompare(b, "it"));
+      return true;
+    } catch { repoPdfs = []; return false; }
   }
   async function login(c, remember) {
     setMsg($("login-msg"), "Accesso in corso…");
@@ -82,7 +86,7 @@
       try { who = (await api("/user")).login + " · " + c.repo; } catch (e) { if (e.status === 401) throw e; }
       const repo = await api("/repos/" + c.repo);
       if (!repo.permissions || !repo.permissions.push) throw Object.assign(new Error("Questo token non ha permesso di scrittura sul repository."), { status: -1 });
-      await loadData();
+      await loadData(); await loadPdfList();
       remember ? sessionStorage.setItem(STORE, JSON.stringify(c)) : sessionStorage.removeItem(STORE);
       $("who").textContent = `Collegato come ${who} (ramo ${c.branch})`;
       $("login").hidden = true; $("panel").hidden = false; $("f-token").value = "";
@@ -96,7 +100,7 @@
   });
   $("btn-logout").addEventListener("click", () => {
     if (dirty() && !confirm("Ci sono modifiche non pubblicate: uscendo andranno perse. Uscire?")) return;
-    cfg = null; data = null; pending.clear(); sessionStorage.removeItem(STORE);
+    cfg = null; data = null; sessionStorage.removeItem(STORE);
     $("panel").hidden = true; $("login").hidden = false; $("f-token").focus();
   });
   $("btn-discard").addEventListener("click", async () => {
@@ -109,15 +113,9 @@
     const btn = $("btn-save"); btn.disabled = true; $("btn-discard").disabled = true;
     const r = encodeURIComponent(cfg.branch), base = `/repos/${cfg.repo}/contents/`;
     try {
-      let i = 0;
-      for (const [path, file] of pending) {
-        setMsg($("save-msg"), `Carico il file ${++i} di ${pending.size}: ${path}…`);
-        let fsha; try { fsha = (await api(base + encPath(path) + "?ref=" + r)).sha; } catch (e) { if (e.status !== 404) throw e; }
-        await api(base + encPath(path), { method: "PUT", body: JSON.stringify({ message: `Admin: carica ${path}`, content: await fileToB64(file), branch: cfg.branch, sha: fsha }) });
-      }
       setMsg($("save-msg"), "Salvo i contenuti del sito…");
       const res = await api(base + "data/site-data.js", { method: "PUT", body: JSON.stringify({ message: "Admin: aggiorna i contenuti del sito", content: textToB64(serialize(data)), branch: cfg.branch, sha: sha || undefined }) });
-      sha = res.content.sha; original = JSON.stringify(data); pending.clear();
+      sha = res.content.sha; original = JSON.stringify(data);
       setMsg($("save-msg"), "Modifiche pubblicate. Il sito si aggiorna in uno o due minuti.", "ok");
     } catch (e) { setMsg($("save-msg"), explain(e), "err"); }
     updateDirty();
@@ -153,10 +151,13 @@
     if (keep && data.baselines.some((b) => b.id === keep)) $("d-baseline").value = keep;
     if (keepCat) $("d-cat").value = keepCat;
   }
-  const gcPending = () => {
-    const used = new Set(data.baselines.flatMap((b) => b.items.map((i) => i.url)));
-    for (const p of [...pending.keys()]) if (!used.has(p)) pending.delete(p);
-  };
+  function fillRepoSelect(keep) {
+    const used = new Map(data.baselines.flatMap((b) => b.items.map((i) => [i.url, i.name])));
+    const paths = [...new Set([...(keep ? [keep] : []), ...repoPdfs])].sort((a, b) => a.localeCompare(b, "it"));
+    $("d-repofile").replaceChildren(el("option", { value: "" }, paths.length ? "— scegli un file —" : "Nessun PDF trovato in pdf/"),
+      ...paths.map((p) => el("option", { value: p }, p + (used.has(p) && p !== keep ? `  (già collegato a «${used.get(p)}»)` : ""))));
+    $("d-repofile").value = keep || "";
+  }
   function renderDocs() {
     fillSelects();
     const b = curBaseline(), box = $("doc-list"); box.replaceChildren();
@@ -169,9 +170,9 @@
       if (!items.length) continue; any = true;
       box.append(el("div", { class: "list-group" }, c), el("div", { class: "list" }, items.map(({ it, idx }) => row(
         el("b", {}, it.name),
-        [fmtDate(it.date), fmtDate(it.date) ? " · " : "", it.url, pending.has(it.url) ? el("span", { class: "tag" }, "da caricare") : ""],
+        [fmtDate(it.date), fmtDate(it.date) ? " · " : "", it.url, !/^https?:/i.test(it.url) && repoPdfs.length && !repoPdfs.includes(it.url) ? el("span", { class: "tag" }, "file non trovato nel repository") : ""],
         [btn("Modifica", `Modifica ${it.name}`, () => editDoc(idx)),
-         btn("Elimina", `Elimina ${it.name}`, () => { if (confirm(`Eliminare «${it.name}» dall'elenco?\n(Il file eventualmente già caricato resta nel repository.)`)) { b.items.splice(idx, 1); gcPending(); renderDocs(); updateDirty(); } }, "danger")]))));
+         btn("Elimina", `Elimina ${it.name}`, () => { if (confirm(`Eliminare «${it.name}» dall'elenco?\n(Il file PDF resta nel repository.)`)) { b.items.splice(idx, 1); renderDocs(); updateDirty(); } }, "danger")]))));
     }
     if (!any) box.append(emptyNote("Nessun documento in questa tappa."));
     updateDirty();
@@ -185,49 +186,46 @@
     }));
   }
   $("d-baseline").addEventListener("change", renderDocs);
+  const srcMode = () => document.querySelector("input[name=d-src]:checked").value;
   document.querySelectorAll("input[name=d-src]").forEach((r) => r.addEventListener("change", () => {
-    const f = document.querySelector("input[name=d-src]:checked").value === "file";
-    $("src-file").hidden = !f; $("src-url").hidden = f;
+    $("src-repo").hidden = srcMode() !== "repo"; $("src-url").hidden = srcMode() !== "url";
   }));
+  $("d-refresh").addEventListener("click", async () => {
+    $("d-refresh").disabled = true; const ok = await loadPdfList(); fillRepoSelect($("d-repofile").value); $("d-refresh").disabled = false;
+    setMsg($("doc-msg"), ok ? `Elenco aggiornato: ${repoPdfs.length} PDF nella cartella pdf/.` : "Non riesco a leggere l'elenco dei file dal repository.", ok ? "ok" : "err");
+  });
   function resetDocForm() {
-    docEdit = null; $("doc-form").reset(); $("src-file").hidden = false; $("src-url").hidden = true;
+    docEdit = null; $("doc-form").reset(); $("src-repo").hidden = false; $("src-url").hidden = true; fillRepoSelect("");
     $("d-baseline").disabled = false; $("doc-submit").textContent = "Aggiungi documento"; $("doc-form-title").textContent = "Aggiungi un documento";
-    $("doc-cancel").hidden = true; $("d-file-hint").textContent = `Il file viene salvato nel repository in pdf/tappa/categoria/. Massimo ${MAX_MB} MB.`;
+    $("doc-cancel").hidden = true;
   }
   function editDoc(idx) {
     const it = curBaseline().items[idx]; docEdit = idx;
     $("d-name").value = it.name; $("d-date").value = it.date || ""; $("d-cat").value = it.cat;
     const ext = /^https?:/i.test(it.url);
-    document.querySelector(`input[name=d-src][value=${ext ? "url" : "file"}]`).checked = true;
-    $("src-file").hidden = ext; $("src-url").hidden = !ext; $("d-url").value = ext ? it.url : ""; $("d-file").value = "";
-    $("d-file-hint").textContent = ext ? "" : `File attuale: ${it.url}. Lascia vuoto per mantenerlo, oppure scegline uno nuovo per sostituirlo.`;
+    document.querySelector(`input[name=d-src][value=${ext ? "url" : "repo"}]`).checked = true;
+    $("src-repo").hidden = ext; $("src-url").hidden = !ext; $("d-url").value = ext ? it.url : ""; fillRepoSelect(ext ? "" : it.url);
     $("d-baseline").disabled = true; $("doc-submit").textContent = "Salva modifica"; $("doc-cancel").hidden = false;
     $("doc-form-title").textContent = "Modifica documento"; $("doc-form-title").scrollIntoView({ block: "center" }); $("d-name").focus();
   }
   $("doc-cancel").addEventListener("click", resetDocForm);
-  $("doc-form").addEventListener("submit", async (e) => {
+  $("doc-form").addEventListener("submit", (e) => {
     e.preventDefault();
     const msg = $("doc-msg"), b = curBaseline(), cat = $("d-cat").value, name = $("d-name").value.trim();
     const old = docEdit !== null ? b.items[docEdit] : null; let url;
     try {
-      if (document.querySelector("input[name=d-src]:checked").value === "file") {
-        const f = $("d-file").files[0];
-        if (f) {
-          if (f.size > MAX_MB * 1048576) throw new Error(`Il file supera ${MAX_MB} MB.`);
-          const head = new TextDecoder().decode(new Uint8Array(await f.slice(0, 5).arrayBuffer()));
-          if (head !== "%PDF-") throw new Error("Il file scelto non è un PDF valido.");
-          url = `pdf/${b.id}/${slug(cat).toLowerCase()}/${slug(f.name.replace(/\.pdf$/i, "")) || "documento"}.pdf`;
-          if (b.items.some((x) => x.url === url && x !== old)) throw new Error("Esiste già un documento che usa un file con questo nome: rinomina il file e riprova.");
-          pending.set(url, f);
-        } else if (old && !/^https?:/i.test(old.url)) url = old.url;
-        else throw new Error("Scegli un file PDF da caricare.");
+      if (srcMode() === "repo") {
+        url = $("d-repofile").value;
+        if (!url) throw new Error("Scegli un PDF dall'elenco. Se non lo vedi, caricalo prima nella cartella pdf/ del repository e premi «Aggiorna l'elenco dei PDF».");
+        const dup = data.baselines.flatMap((x) => x.items).find((x) => x.url === url && x !== old);
+        if (dup) throw new Error(`Questo file è già collegato al documento «${dup.name}».`);
       } else {
         url = $("d-url").value.trim();
         if (!/^https?:\/\/\S+$/i.test(url)) throw new Error("Inserisci un indirizzo che inizi con http:// o https://.");
       }
       const item = { cat, name, date: $("d-date").value || "", url };
       if (old) b.items[docEdit] = item; else b.items.push(item);
-      gcPending(); setMsg(msg, old ? "Documento aggiornato." : "Documento aggiunto all'elenco.", "ok");
+      setMsg(msg, old ? "Documento aggiornato." : "Documento aggiunto all'elenco.", "ok");
       resetDocForm(); renderDocs(); $("d-name").focus();
     } catch (err) { setMsg(msg, err.message, "err"); }
   });
@@ -295,7 +293,7 @@
   });
 
   function resetForms() { resetDocForm(); glo.reset(); mem.reset(); con.reset(); }
-  function renderAll() { renderVisibility(); renderDocs(); glo.render(); mem.render(); con.render(); }
+  function renderAll() { renderVisibility(); fillRepoSelect($("d-repofile").value); renderDocs(); glo.render(); mem.render(); con.render(); }
 
   /* ---------- riaccesso nella stessa scheda ---------- */
   try { const s = JSON.parse(sessionStorage.getItem(STORE) || "null"); if (s) { $("f-repo").value = s.repo; $("f-branch").value = s.branch; login(s, true); } } catch { /* ignora */ }
