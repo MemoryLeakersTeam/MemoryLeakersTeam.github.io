@@ -82,19 +82,39 @@ window.SITE_DATA = {
   ],
   "members": [
     {
-      "name": "Matteo Marcon",
-      "github": "Matteomarcon",
-      "email": ""
-    },
-    {
       "name": "Matteo Arcandi",
       "github": "ttteo",
       "email": "matteo.arcandi@studenti.unipd.it"
     },
     {
+      "name": "Jacopo De Donà",
+      "github": "jeidi19",
+      "email": "jacopo.dedona@studenti.unipd.it"
+    },
+    {
+      "name": "Jacopo Franco",
+      "github": "JJ-jacopo24",
+      "email": "jacopo.franco@studenti.unipd.it"
+    },
+    {
+      "name": "Matteo Marcon",
+      "github": "Matteomarcon",
+      "email": "matteo.marcon.5@studenti.unipd.it"
+    },
+    {
+      "name": "Riccardo Peresson",
+      "github": "Ric02P",
+      "email": "riccardo.peresson@studenti.unipd.it"
+    },
+    {
+      "name": "Paolo Prevedello Ramirez",
+      "github": "paolopreve",
+      "email": "paolo.prevedelloramirez@studenti.unipd.it"
+    },
+    {
       "name": "Chiara Protopapa",
       "github": "Kyara-Prot",
-      "email": ""
+      "email": "chiara.protopapa@studenti.unipd.it"
     }
   ],
   "contacts": [
