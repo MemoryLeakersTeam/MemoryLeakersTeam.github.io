@@ -82,6 +82,111 @@ window.SITE_DATA = {
       "term": "Way of Working",
       "lang": "en",
       "def": "Insieme di regole e strumenti con cui il gruppo organizza il proprio lavoro."
+    },
+    {
+      "term": "API",
+      "lang": "en",
+      "def": "Insieme di regole che permette a due programmi di scambiarsi dati e comunicare tra loro."
+    },
+    {
+      "term": "JSON",
+      "lang": "en",
+      "def": "Formato di testo usato per scambiare dati in modo ordinato tra sistemi diversi."
+    },
+    {
+      "term": "ERP",
+      "lang": "en",
+      "def": "Software gestionale che un'azienda usa per tenere insieme contabilità, magazzino e altri processi."
+    },
+    {
+      "term": "Dashboard",
+      "lang": "en",
+      "def": "Schermata che mostra dati e grafici in un unico colpo d'occhio."
+    },
+    {
+      "term": "Widget",
+      "lang": "en",
+      "def": "Singolo elemento grafico (un grafico, una tabella) dentro una dashboard."
+    },
+    {
+      "term": "Ollama",
+      "lang": "en",
+      "def": "Programma che permette di far girare un modello di intelligenza artificiale sul proprio computer, senza passare da internet."
+    },
+    {
+      "term": "Data warehouse",
+      "lang": "en",
+      "def": "Grande archivio centrale dove vengono raccolti tutti i dati di un'azienda, pensato per essere analizzato."
+    },
+    {
+      "term": "System prompt",
+      "lang": "en",
+      "def": "Istruzioni iniziali date a un'intelligenza artificiale per dirle come comportarsi prima che l'utente scriva qualcosa."
+    },
+    {
+      "term": "Whitelist",
+      "lang": "en",
+      "def": "Lista di cose permesse: tutto ciò che non è nella lista viene bloccato."
+    },
+    {
+      "term": "SQL libero",
+      "def": "Comando al database scritto senza controlli o limitazioni, rischioso se generato da un'intelligenza artificiale senza supervisione."
+    },
+    {
+      "term": "Ingestione",
+      "def": "Processo con cui un sistema importa e inizia a usare dei dati provenienti da un'altra fonte."
+    },
+    {
+      "term": "Progetto",
+      "def": "Insieme di attività pianificate, temporanee e coordinate per realizzare un sistema software unico nel rispetto di vincoli di tempi e risorse."
+    },
+    {
+      "term": "Glossario",
+      "def": "Documento di progetto che definisce in modo univoco i termini tecnici e specialistici per evitare ambiguità tra i membri del team e gli stakeholder."
+    },
+    {
+      "term": "CI/CD",
+      "lang": "en",
+      "def": "Pratica di sviluppo che automatizza l'integrazione del codice, l'esecuzione dei test e il rilascio continuo del software."
+    },
+    {
+      "term": "commit",
+      "lang": "en",
+      "def": "Salvataggio di un insieme di modifiche al codice nel sistema di controllo versione (es. Git), accompagnato da un messaggio descrittivo."
+    },
+    {
+      "term": "issues",
+      "lang": "en",
+      "def": "Schede di tracciamento usate per descrivere e gestire compiti da svolgere, problemi da risolvere o nuove funzionalità da implementare."
+    },
+    {
+      "term": "pull request",
+      "lang": "en",
+      "def": "Richiesta inviata dal team per far revisionare e unire (_merge_) le modifiche di un ramo di codice nel ramo principale del repository."
+    },
+    {
+      "term": "verificatore",
+      "def": "Ruolo del team responsabile di controllare la qualità e la correttezza di documenti e codice rispetto ai requisiti e alle Norme di Progetto."
+    },
+    {
+      "term": "Definition of Done",
+      "lang": "en",
+      "def": "Elenco di criteri oggettivi condivisi che stabilisce quando un'attività o una funzionalità può considerarsi completamente completata e collaudata."
+    },
+    {
+      "term": "Agile",
+      "lang": "en",
+      "def": "Metodologia di gestione del progetto basata su cicli di sviluppo brevi e iterativi, flessibilità ai cambiamenti e collaborazione costante."
+    },
+    {
+      "term": "Sprint",
+      "lang": "en",
+      "def": "Intervallo di tempo di durata fissa entro il quale il team pianifica, sviluppa e completa un blocco definito di attività."
+    },
+    {
+      "term": "Sprint Retrospective",
+      "lang": "en",
+      "def": "Riunione svolta al termine di ogni Sprint per analizzare il lavoro svolto e individuare miglioramenti nel processo di lavoro per lo Sprint successivo."
     }
   ],
   "members": [
