@@ -5,22 +5,22 @@ Sito statico (HTML, CSS, JavaScript, nessuna dipendenza da installare) del grupp
 ## Provarlo in locale
 
 ```bash
-python3 -m http.server 8000
+python3 tools/serve.py
 ```
 
-poi aprire <http://localhost:8000>. Serve un server: aprendo i file direttamente il browser non carica tutto correttamente.
+poi aprire <http://localhost:8000>. Lo script serve le pagine con gli stessi indirizzi puliti di GitHub Pages (`/glossario` invece di `/glossario.html`). Serve un server: aprendo i file direttamente il browser non carica tutto correttamente.
 
 ## Cosa modificare
 
 | Cosa | Dove |
 |---|---|
-| Documenti, verbali, diapositive, glossario, componenti, contatti | pannello admin (`/admin.html`) oppure a mano `data/site-data.js`; i PDF stanno in `pdf/<tappa>/<categoria>/` |
+| Documenti, verbali, diapositive, glossario, componenti, contatti | pannello admin (`/admin`) oppure a mano `data/site-data.js`; i PDF stanno in `pdf/<tappa>/<categoria>/` |
 | Componenti del gruppo | `chi-siamo.html` |
 | Contatti | `contatti.html` |
 
 ## Pannello admin (documenti, glossario, componenti, contatti)
 
-Aprire `admin.html` (link «Area riservata» nel footer). Serve un token personale di GitHub con permesso **Contents: Read and write** solo su questo repository (guida nella pagina stessa). Il pannello salva i cambiamenti con un commit sul ramo `main`: il workflow `pages.yml` parte da solo e il sito si aggiorna in 1–2 minuti.
+Aprire `/admin` (link «Area riservata» nel footer). Serve un token personale di GitHub con permesso **Contents: Read and write** solo su questo repository (guida nella pagina stessa). Il pannello salva i cambiamenti con un commit sul ramo `main`: il workflow `pages.yml` parte da solo e il sito si aggiorna in 1–2 minuti.
 
 - **I PDF si inseriscono a mano**: si copiano nella cartella `pdf/` del repository (per esempio `pdf/rtb/documenti-esterni/nome.pdf`, con `git` o dal sito di GitHub) e poi, dal pannello, si sceglie il file dall'elenco e lo si collega a una tappa e a una categoria. Il pannello non carica file.
 - In alternativa si può indicare un link esterno.
@@ -40,7 +40,7 @@ Lo stesso controllo (senza `--external`) gira nel workflow `.github/workflows/pa
 
 ## Struttura
 
-- `index.html`, `glossario.html`, `chi-siamo.html`, `contatti.html`, `404.html`, `admin.html`: pagine
+- `index.html`, `glossario.html`, `chi-siamo.html`, `contatti.html`, `404.html`, `admin.html`: pagine (online hanno indirizzi puliti: `/`, `/glossario`, `/chi-siamo`, `/contatti`, `/admin`)
 - `pdf/`: i PDF pubblicati
 - `css/`, `js/`: stile e script (`js/head.js` disegna la testa a rete neurale)
 - `fonts/`: Inter e Fraunces, ospitati da noi (licenza OFL, vedi i file `OFL-*.txt`)

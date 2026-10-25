@@ -30,7 +30,10 @@ parsed["index.html"].ids |= dynamic_ids
 
 errors, warnings, seen_ext = [], [], {}
 def local(path_str, base):
-    return (ROOT / path_str.lstrip("/")) if path_str.startswith("/") else (base.parent / path_str)
+    t = (ROOT / path_str.lstrip("/")) if path_str.startswith("/") else (base.parent / path_str)
+    if t == ROOT or (t.is_dir() and (t / "index.html").exists()): return ROOT / "index.html"   # "/" → index.html
+    if not t.suffix and t.with_suffix(".html").exists(): return t.with_suffix(".html")          # "/glossario" → glossario.html
+    return t
 
 for page in PAGES:
     for tag, link in parsed[page.name].links:

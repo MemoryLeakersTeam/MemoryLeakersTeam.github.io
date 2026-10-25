@@ -1,5 +1,9 @@
 /* Menu mobile accessibile, header con sfondo allo scroll, apertura della tappa indicata dall'URL (#rtb, #poc…). */
 (() => {
+  // indirizzi puliti: /index.html → /  e  /glossario.html → /glossario (sulla stessa pagina, senza ricaricarla)
+  const clean = location.pathname.replace(/(^|\/)index\.html$/, "$1").replace(/\.html$/, "");
+  if (clean !== location.pathname && !/^\/404/.test(clean)) history.replaceState(null, "", clean + location.search + location.hash);
+
   const btn = document.querySelector(".menu-btn");
   const menu = document.getElementById("menu");
   const header = document.querySelector(".nav");
