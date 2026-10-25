@@ -251,6 +251,7 @@
       const order = arr.map((x, i) => i); if (o.sort) order.sort((a, b) => o.sort(arr[a], arr[b]));
       list.replaceChildren(order.length ? el("div", { class: "list" }, order.map((i) => {
         const x = arr[i], { main, meta } = o.row(x), acts = [];
+        if (o.extra) acts.push(...o.extra(x));
         if (o.reorder) acts.push(btn("↑", `Sposta su ${main}`, () => { move(arr, i, -1); render(); }), btn("↓", `Sposta giù ${main}`, () => { move(arr, i, 1); render(); }));
         acts.push(btn("Modifica", `Modifica ${main}`, () => edit(i)), btn("Elimina", `Elimina ${main}`, () => { if (confirm(`Eliminare «${main}»?`)) { arr.splice(i, 1); reset(); render(); } }, "danger"));
         return row(el("b", {}, main), meta, acts);
@@ -263,13 +264,22 @@
     form: "g-form", list: "g-list", submit: "g-submit", cancel: "g-cancel", title: "g-form-title",
     addLabel: "Aggiungi termine", titleAdd: "Aggiungi un termine", titleEdit: "Modifica termine",
     arr: () => data.glossary, sort: (a, b) => a.term.localeCompare(b.term, "it"),
-    fill: (x) => { $("g-term").value = x.term; $("g-def").value = x.def; $("g-en").checked = x.lang === "en"; },
+    fill: (x) => { $("g-term").value = x.term; $("g-def").value = x.def; $("g-en").checked = x.lang === "en"; $("g-id").value = x.id || ""; },
     read: (idx) => {
       const term = $("g-term").value.trim(), def = $("g-def").value.trim();
       if (data.glossary.some((x, i) => i !== idx && x.term.toLowerCase() === term.toLowerCase())) throw new Error("Esiste già un termine con questo nome.");
-      return { term, ...($("g-en").checked ? { lang: "en" } : {}), def };
+      const id = $("g-id").value.trim();
+      if (id) {
+        if (window.MLSlug.reserved.has(id)) throw new Error("Questo identificativo è riservato dal sito: scegline un altro.");
+        if (data.glossary.some((x, i) => i !== idx && x.id === id)) throw new Error("Un altro termine usa già questo identificativo.");
+      }
+      return { term, ...(id ? { id } : {}), ...($("g-en").checked ? { lang: "en" } : {}), def };
     },
-    row: (x) => ({ main: x.term, meta: x.def }),
+    row: (x) => ({ main: x.term, meta: [x.def, el("br"), el("code", {}, "/glossario#" + window.MLSlug.termIds(data.glossary).get(x))] }),
+    extra: (x) => [btn("Copia link", `Copia il link del termine ${x.term}`, async () => {
+      const url = "https://memoryleakersteam.github.io/glossario#" + window.MLSlug.termIds(data.glossary).get(x);
+      try { await navigator.clipboard.writeText(url); setMsg($("save-msg"), `Link copiato: ${url}`, "ok"); } catch { setMsg($("save-msg"), url, ""); }
+    })],
   });
   const mem = crud({
     form: "m-form", list: "m-list", submit: "m-submit", cancel: "m-cancel", title: "m-form-title",

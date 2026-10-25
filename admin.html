@@ -134,6 +134,10 @@
           <form id="g-form" class="form" autocomplete="off">
             <label>Termine<input id="g-term" required maxlength="80"></label>
             <label>Definizione<textarea id="g-def" required rows="3" maxlength="500"></textarea></label>
+            <label>Identificativo del link <span class="opt">(facoltativo)</span>
+              <input id="g-id" maxlength="60" pattern="[a-z0-9]+(-[a-z0-9]+)*" spellcheck="false" aria-describedby="g-id-hint">
+              <span class="hint" id="g-id-hint">Solo lettere minuscole, numeri e trattini. Se lo lasci vuoto viene creato dal termine (per esempio «capitolato»). Con un identificativo fisso il link resta valido anche se in futuro rinomini il termine.</span>
+            </label>
             <label class="check"><input id="g-en" type="checkbox"> Il termine è in inglese</label>
             <div class="row">
               <button class="btn" type="submit" id="g-submit">Aggiungi termine</button>
@@ -189,6 +193,7 @@
 
   <script src="data/site-data.js"></script>
   <script src="js/nav.js"></script>
+  <script src="js/slug.js"></script>
   <script src="js/admin.js"></script>
 </body>
 </html>

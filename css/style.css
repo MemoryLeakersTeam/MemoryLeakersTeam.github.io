@@ -223,3 +223,10 @@ a.inline:hover { color: var(--ink); }
 .member-links a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
 .member-links a:hover { color: var(--ink); }
 .sub-title { font-family: var(--serif); font-weight: 400; font-size: 1.4rem; margin: 48px 0 6px; }
+
+/* ---------- link diretti ai termini del glossario ---------- */
+.term { scroll-margin-top: 100px; }
+.term:target, .term.hl { border-color: var(--accent-text); box-shadow: 0 0 0 3px rgba(79,138,132,.28); outline: none; }
+.term:focus { outline: none; }
+.permalink { margin-left: .5em; font-size: .85em; font-weight: 400; color: var(--muted); text-decoration: none; padding: 2px 6px; border-radius: 6px; }
+.permalink:hover { color: var(--accent-text); background: rgba(79,138,132,.12); }

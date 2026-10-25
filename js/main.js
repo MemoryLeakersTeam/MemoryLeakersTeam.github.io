@@ -47,6 +47,7 @@
     const q = $("glossary-search"), status = $("glossary-status"), bar = $("letter-filter");
     const letterOf = (t) => { const c = t.normalize("NFD").replace(/[̀-ͯ]/g, "").charAt(0).toUpperCase(); return /[A-Z]/.test(c) ? c : "#"; };
     const sorted = [...data.glossary].sort((a, b) => a.term.localeCompare(b.term, "it"));
+    const ids = window.MLSlug.termIds(data.glossary);
     const present = new Set(sorted.map((g) => letterOf(g.term)));
     let letter = "";
     const letters = [...Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)), ...(present.has("#") ? ["#"] : [])];
@@ -62,7 +63,7 @@
       gl.innerHTML = Object.keys(groups).map((l) => `
         <section class="letter-group" aria-labelledby="L-${l === "#" ? "num" : l}">
           <h2 class="letter-h" id="L-${l === "#" ? "num" : l}">${l}</h2>
-          <dl class="glossary">${groups[l].map((g) => `<div class="term"><dt${langAttr(g.lang)}>${esc(g.term)}</dt><dd>${esc(g.def)}</dd></div>`).join("")}</dl>
+          <dl class="glossary">${groups[l].map((g) => `<div class="term" id="${esc(ids.get(g))}"><dt${langAttr(g.lang)}>${esc(g.term)}<a class="permalink" href="#${esc(ids.get(g))}" aria-label="Link diretto al termine ${esc(g.term)}" lang="it">#</a></dt><dd>${esc(g.def)}</dd></div>`).join("")}</dl>
         </section>`).join("");
       $("glossary-empty").hidden = list.length > 0;
       status.textContent = f || letter ? (list.length ? `${list.length} ${list.length === 1 ? "termine trovato" : "termini trovati"}` : "Nessun termine trovato") : "";
@@ -73,7 +74,17 @@
       bar.querySelector(`[data-l="${letter}"]`).focus();
     });
     q && q.addEventListener("input", render);
-    drawBar(); render();
+    // link diretto (glossario#parola): azzera i filtri, mostra il termine e lo porta in vista
+    const goToHash = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      const g = id && sorted.find((x) => ids.get(x) === id);
+      if (!g) return;
+      letter = ""; if (q) q.value = ""; drawBar(); render();
+      document.querySelectorAll(".term.hl").forEach((x) => x.classList.remove("hl"));
+      const node = $(id); node.classList.add("hl"); node.tabIndex = -1; node.scrollIntoView({ block: "center" }); node.focus({ preventScroll: true });
+    };
+    addEventListener("hashchange", goToHash);
+    drawBar(); render(); goToHash();
   }
 
   /* ---------- componenti e contatti ---------- */
