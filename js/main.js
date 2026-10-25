@@ -81,7 +81,12 @@
       if (!g) return;
       letter = ""; if (q) q.value = ""; drawBar(); render();
       document.querySelectorAll(".term.hl").forEach((x) => x.classList.remove("hl"));
-      const node = $(id); node.classList.add("hl"); node.tabIndex = -1; node.scrollIntoView({ block: "center" }); node.focus({ preventScroll: true });
+      const node = $(id); node.classList.add("hl"); node.tabIndex = -1; const reveal = () => node.scrollIntoView({ block: "center", behavior: "instant" });
+      const ensure = () => { const r = node.getBoundingClientRect(); if (r.top < 60 || r.bottom > innerHeight) reveal(); };
+      reveal(); node.focus({ preventScroll: true });
+      // font e immagini caricati dopo possono spostare il layout: se il termine non è più in vista, lo si ricentra
+      if (document.fonts) document.fonts.ready.then(ensure);
+      if (document.readyState !== "complete") addEventListener("load", ensure, { once: true });
     };
     addEventListener("hashchange", goToHash);
     drawBar(); render(); goToHash();
