@@ -18,7 +18,7 @@ window.SITE_DATA = {
         {
           "cat": "Verbali interni",
           "name": "Verbale interno 13/10/2026",
-          "date": "0006-10-13",
+          "date": "2026-10-13",
           "url": "pdf/candidatura/verbali_interni/2026-10-13.pdf"
         },
         {
