@@ -32,12 +32,6 @@ window.SITE_DATA = {
           "name": "Verbale interno 20/10/2026",
           "date": "2026-10-20",
           "url": "pdf/candidatura/verbali_interni/2026-10-20.pdf"
-        },
-        {
-          "cat": "Verbali esterni",
-          "name": "Verbale esterno 22/10/2026 (Ergon)",
-          "date": "2026-10-22",
-          "url": "pdf/candidatura/verbali_esterni/2026-10-22-ergon.pdf"
         }
       ],
       "visible": true
