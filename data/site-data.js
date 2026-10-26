@@ -14,7 +14,32 @@ window.SITE_DATA = {
       "step": "1",
       "title": "Candidatura",
       "sub": "Presentazione del gruppo e scelta del capitolato",
-      "items": [],
+      "items": [
+        {
+          "cat": "Verbali interni",
+          "name": "Verbale interno 13/10/2026",
+          "date": "0006-10-13",
+          "url": "pdf/candidatura/verbali_interni/2026-10-13.pdf"
+        },
+        {
+          "cat": "Verbali interni",
+          "name": "Verbale interno 19/10/2026",
+          "date": "2026-10-19",
+          "url": "pdf/candidatura/verbali_interni/2026-10-19.pdf"
+        },
+        {
+          "cat": "Verbali interni",
+          "name": "Verbale interno 20/10/2026",
+          "date": "2026-10-20",
+          "url": "pdf/candidatura/verbali_interni/2026-10-20.pdf"
+        },
+        {
+          "cat": "Verbali esterni",
+          "name": "Verbale esterno 22/10/2026 (Ergon)",
+          "date": "2026-10-22",
+          "url": "pdf/candidatura/verbali_esterni/2026-10-22-ergon.pdf"
+        }
+      ],
       "visible": true
     },
     {
@@ -24,7 +49,7 @@ window.SITE_DATA = {
       "titleLang": "en",
       "sub": "RTB: requisiti e tecnologie",
       "items": [],
-      "visible": true
+      "visible": false
     },
     {
       "id": "poc",
