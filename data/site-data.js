@@ -206,6 +206,12 @@ window.SITE_DATA = {
       "term": "Sprint Retrospective",
       "lang": "en",
       "def": "Riunione svolta al termine di ogni Sprint per analizzare il lavoro svolto e individuare miglioramenti nel processo di lavoro per lo Sprint successivo."
+    },
+    {
+      "term": "Git Flow",
+      "id": "git-flow",
+      "lang": "en",
+      "def": "Modello di diramazione (branching strategy) per Git che organizza il lavoro tramite rami dedicati (main, develop, feature, release, hotfix) per isolare le funzionalità e garantire la stabilità del codice."
     }
   ],
   "members": [
