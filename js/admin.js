@@ -166,7 +166,7 @@
     let any = false;
     for (const c of cats) {
       const items = b.items.map((it, idx) => ({ it, idx })).filter((x) => x.it.cat === c)
-        .sort((a, z) => (a.it.date || "9999").localeCompare(z.it.date || "9999") || a.it.name.localeCompare(z.it.name, "it"));
+        .sort((a, z) => (z.it.date || "").localeCompare(a.it.date || "") || a.it.name.localeCompare(z.it.name, "it")); // come sul sito: dal più recente
       if (!items.length) continue; any = true;
       box.append(el("div", { class: "list-group" }, c), el("div", { class: "list" }, items.map(({ it, idx }) => row(
         el("b", {}, it.name),

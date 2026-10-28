@@ -21,7 +21,7 @@
       const items = b.items || [];
       const order = [...cats, ...new Set(items.map((x) => x.cat).filter((c) => !cats.includes(c)))];
       const body = order.map((c) => {
-        const list = items.filter((x) => x.cat === c).sort((a, b2) => (a.date || "9999").localeCompare(b2.date || "9999") || a.name.localeCompare(b2.name, "it"));
+        const list = items.filter((x) => x.cat === c).sort((a, b2) => (b2.date || "").localeCompare(a.date || "") || a.name.localeCompare(b2.name, "it")); // dal più recente; senza data in fondo
         if (!list.length) return "";
         return `<div class="group-title">${esc(c)}</div>` + list.map((it) => {
           const url = safeUrl(it.url), isPdf = /\.pdf($|[?#])/i.test(it.url || "");
