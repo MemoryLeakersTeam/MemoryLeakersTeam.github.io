@@ -53,7 +53,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali esterni",
-          "name": "Verbale esterno 22/10/2026 Virmar firmato",
+          "name": "Verbale esterno 22/10/2026 Vimar firmato",
           "date": "2026-10-22",
           "url": "pdf/candidatura/verbali_esterni/2026-10-22-vimar-signed.pdf"
         },
