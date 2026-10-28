@@ -32,6 +32,36 @@ window.SITE_DATA = {
           "name": "Verbale interno 20/10/2026",
           "date": "2026-10-20",
           "url": "pdf/candidatura/verbali_interni/2026-10-20.pdf"
+        },
+        {
+          "cat": "Verbali interni",
+          "name": "Verbale interno 23/10/2026",
+          "date": "2026-10-23",
+          "url": "pdf/candidatura/verbali_interni/2026-10-23.pdf"
+        },
+        {
+          "cat": "Verbali interni",
+          "name": "Verbale interno 26/10/2026",
+          "date": "2026-10-26",
+          "url": "pdf/candidatura/verbali_interni/2026-10-26.pdf"
+        },
+        {
+          "cat": "Verbali interni",
+          "name": "Verbale interno 27/10/2026",
+          "date": "2026-10-27",
+          "url": "pdf/candidatura/verbali_interni/2026-10-27.pdf"
+        },
+        {
+          "cat": "Verbali esterni",
+          "name": "Verbale esterno 22/10/2026 Virmar firmato",
+          "date": "2026-10-22",
+          "url": "pdf/candidatura/verbali_esterni/2026-10-22-vimar-signed.pdf"
+        },
+        {
+          "cat": "Verbali esterni",
+          "name": "Verbale esterno 22/10/2026 Ergon firmato",
+          "date": "2026-10-22",
+          "url": "pdf/candidatura/verbali_esterni/2026-10-22-ergon-signed.pdf"
         }
       ],
       "visible": true
