@@ -62,6 +62,12 @@ window.SITE_DATA = {
           "name": "Verbale esterno 22/10/2026 Ergon firmato",
           "date": "2026-10-22",
           "url": "pdf/candidatura/verbali_esterni/2026-10-22-ergon-signed.pdf"
+        },
+        {
+          "cat": "Verbali esterni",
+          "name": "Verbale esterno 26/10/2026 Miriade firmato",
+          "date": "2026-10-26",
+          "url": "pdf/candidatura/verbali_esterni/2026-10-26-miriade-signed.pdf"
         }
       ],
       "visible": true
