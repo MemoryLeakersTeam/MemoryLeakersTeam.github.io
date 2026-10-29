@@ -205,22 +205,22 @@ window.SITE_DATA = {
       "def": "Pratica di sviluppo che automatizza l'integrazione del codice, l'esecuzione dei test e il rilascio continuo del software."
     },
     {
-      "term": "commit",
+      "term": "Commit",
       "lang": "en",
       "def": "Salvataggio di un insieme di modifiche al codice nel sistema di controllo versione (es. Git), accompagnato da un messaggio descrittivo."
     },
     {
-      "term": "issues",
+      "term": "Issues",
       "lang": "en",
       "def": "Schede di tracciamento usate per descrivere e gestire compiti da svolgere, problemi da risolvere o nuove funzionalità da implementare."
     },
     {
-      "term": "pull request",
+      "term": "Pull request",
       "lang": "en",
       "def": "Richiesta inviata dal team per far revisionare e unire (_merge_) le modifiche di un ramo di codice nel ramo principale del repository."
     },
     {
-      "term": "verificatore",
+      "term": "Verificatore",
       "def": "Ruolo del team responsabile di controllare la qualità e la correttezza di documenti e codice rispetto ai requisiti e alle Norme di Progetto."
     },
     {
@@ -248,6 +248,173 @@ window.SITE_DATA = {
       "id": "git-flow",
       "lang": "en",
       "def": "Modello di diramazione (branching strategy) per Git che organizza il lavoro tramite rami dedicati (main, develop, feature, release, hotfix) per isolare le funzionalità e garantire la stabilità del codice."
+    },
+    {
+      "term": "Anonymizer",
+      "lang": "en",
+      "def": "Modulo software che rimuove o maschera i dati personali sensibili prima dell'elaborazione."
+    },
+    {
+      "term": "Architettura software",
+      "def": "Struttura fondamentale di un sistema che ne definisce i componenti e le relative relazioni."
+    },
+    {
+      "term": "Asincrona",
+      "def": "Modalità di esecuzione in cui un'operazione viene avviata senza bloccare il sistema in attesa della risposta."
+    },
+    {
+      "term": "AVP",
+      "lang": "en",
+      "def": "(Amazon Verified Permissions) - Servizio di AWS per la gestione delle autorizzazioni e dei permessi d'accesso basato su policy."
+    },
+    {
+      "term": "AWS",
+      "lang": "en",
+      "def": "(Amazon Web Services) - Piattaforma di servizi di cloud computing fornita da Amazon."
+    },
+    {
+      "term": "AWS Bedrock",
+      "lang": "en",
+      "def": "Servizio gestito da AWS che offre l'accesso a diversi modelli di intelligenza artificiale tramite API."
+    },
+    {
+      "term": "Cache semantica",
+      "def": "Memoria temporanea che riutilizza le risposte dell'IA confrontando il significato concettuale delle richieste."
+    },
+    {
+      "term": "Codice sorgente",
+      "def": "Insieme di istruzioni scritte da un programmatore in un linguaggio comprensibile dall'essere umano."
+    },
+    {
+      "term": "Committente",
+      "def": "I docenti del corso che definiscono i vincoli, il regolamento e valutano il lavoro svolto dal gruppo."
+    },
+    {
+      "term": "Dashboard FinOps",
+      "lang": "en",
+      "def": "Interfaccia di monitoraggio dedicata all'analisi in tempo reale dei costi dell'infrastruttura cloud e delle API di IA."
+    },
+    {
+      "term": "Delay",
+      "lang": "en",
+      "def": "Tempo di attesa o ritardo che intercorre tra l'invio di una richiesta e la risposta del sistema."
+    },
+    {
+      "term": "Design",
+      "lang": "en",
+      "def": "Fase di progettazione in cui si definiscono la struttura, le interfacce e i dettagli tecnici del software."
+    },
+    {
+      "term": "Fork",
+      "lang": "en",
+      "def": "Copia autonoma di un repository di codice che permette di sviluppare modifiche senza alterare il progetto originale."
+    },
+    {
+      "term": "GitHub",
+      "lang": "en",
+      "def": "Piattaforma cloud per l'hosting e il controllo di versione del codice sorgente basata su Git."
+    },
+    {
+      "term": "GitHub Projects",
+      "lang": "en",
+      "def": "Strumento integrato in GitHub per l'organizzazione e la gestione dei task di progetto tramite schede visuali."
+    },
+    {
+      "term": "Google Presentazioni",
+      "def": "Applicazione web collaborativa utilizzata per creare e condividere diapositive e resoconti visuali."
+    },
+    {
+      "term": "Kanban",
+      "lang": "en",
+      "def": "Metodo di gestione del lavoro basato su una lavagna visuale per tracciare lo stato di avanzamento delle attività."
+    },
+    {
+      "term": "LiteLLM",
+      "lang": "en",
+      "def": "Proxy open-source che unifica l'accesso a differenti modelli linguistici tramite un'unica interfaccia."
+    },
+    {
+      "term": "Middleware",
+      "lang": "en",
+      "def": "Componente software che fa da tramite tra due applicazioni per gestire, filtrare o trasformare i dati in transito."
+    },
+    {
+      "term": "Modelli di embedding",
+      "def": "Algoritmi di intelligenza artificiale che convertono testi o immagini in vettori numerici per calcolarne il significato."
+    },
+    {
+      "term": "Multi-tenancy",
+      "lang": "en",
+      "def": "Architettura software che permette a una singola applicazione di servire più clienti separando nettamente i loro dati."
+    },
+    {
+      "term": "MVP",
+      "lang": "en",
+      "def": "(Minimum Viable Product) - Versione essenziale e funzionante del prodotto, contenente solo le funzionalità fondamentali per la validazione."
+    },
+    {
+      "term": "Open-source",
+      "lang": "en",
+      "def": "Software il cui codice sorgente è reso pubblico e liberamente modificabile o distribuibile."
+    },
+    {
+      "term": "Ore produttive",
+      "def": "Monte ore individuale dedicato al lavoro effettivo di progetto rendicontabile secondo il Regolamento."
+    },
+    {
+      "term": "Proponente",
+      "def": "Azienda esterna che presenta un capitolato d'appalto e fornisce supporto tecnico al gruppo."
+    },
+    {
+      "term": "RAG",
+      "lang": "en",
+      "def": "(Retrieval-Augmented Generation) - Tecnica che arricchisce i prompt forniti all'IA recuperando informazioni da una fonte dati esterna verificata."
+    },
+    {
+      "term": "Redis",
+      "lang": "en",
+      "def": "Database in memoria ad altissime prestazioni usato come cache o gestore di code di messaggi."
+    },
+    {
+      "term": "Repository",
+      "lang": "en",
+      "def": "Archivio digitale in cui vengono conservati il codice sorgente, la documentazione e la cronologia delle modifiche."
+    },
+    {
+      "term": "Requisiti funzionali",
+      "def": "Descrizione delle funzionalità e dei comportamenti specifici che il software deve eseguire."
+    },
+    {
+      "term": "Requisiti qualitativi",
+      "def": "Vincoli e attributi di qualità che il sistema deve rispettare, come prestazioni, sicurezza e usabilità."
+    },
+    {
+      "term": "Ricerca vettoriale",
+      "def": "Tecnica di ricerca basata sul calcolo della distanza matematica tra i significati dei testi convertiti in vettori."
+    },
+    {
+      "term": "Scoring",
+      "lang": "en",
+      "def": "Punteggio numerico che misura la rilevanza o la qualità di un risultato rispetto a una query."
+    },
+    {
+      "term": "Test di qualità",
+      "def": "Insieme di verifiche volte a garantire che il sistema rispetti gli standard di prestazione, sicurezza e usabilità previsti."
+    },
+    {
+      "term": "Unit test",
+      "lang": "en",
+      "def": "Test automatizzati leggeri che verificano il corretto funzionamento di una singola unità di codice in isolamento."
+    },
+    {
+      "term": "UX/UI",
+      "lang": "en",
+      "def": "User Experience (esperienza dell'utente durante l'uso) e User Interface (interfaccia grafica con cui interagisce)."
+    },
+    {
+      "term": "Vector store",
+      "lang": "en",
+      "def": "Database specializzato nell'archiviazione e nella ricerca rapida di vettori ad alta dimensione (embedding)."
     }
   ],
   "members": [
