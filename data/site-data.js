@@ -415,6 +415,73 @@ window.SITE_DATA = {
       "term": "Vector store",
       "lang": "en",
       "def": "Database specializzato nell'archiviazione e nella ricerca rapida di vettori ad alta dimensione (embedding)."
+    },
+    {
+      "term": "Allucinazione",
+      "def": "Fenomeno in cui un modello LLM genera informazioni false, inventate o non supportate dai dati, presentandole come veritiere."
+    },
+    {
+      "term": "Container",
+      "lang": "en",
+      "def": "Tecnologia che impacchetta un'applicazione e le sue dipendenze in un ambiente isolato, leggero e portabile."
+    },
+    {
+      "term": "ETL",
+      "lang": "en",
+      "def": "(Extract, Transform, Load) - Processo di estrazione dei dati da fonti diverse, loro trasformazione e pulizia per uniformarli, e successivo caricamento in un database."
+    },
+    {
+      "term": "MCP",
+      "lang": "en",
+      "def": "(Model Context Protocol) - Protocollo aperto che standardizza il modo in cui i modelli di intelligenza artificiale si collegano in modo sicuro a fonti dati esterne e strumenti."
+    },
+    {
+      "term": "MFA",
+      "lang": "en",
+      "def": "(Multi-Factor Authentication) - Sistema di autenticazione che richiede due o più metodi di verifica indipendenti per confermare l'identità dell'utente."
+    },
+    {
+      "term": "Microservizi",
+      "def": "Stile architetturale in cui un'applicazione è composta da piccoli servizi indipendenti e comunicanti tra loro."
+    },
+    {
+      "term": "OAuth2",
+      "lang": "en",
+      "def": "Protocollo di autorizzazione standard che permette a un'applicazione di accedere a risorse per conto dell'utente senza condividerne le credenziali."
+    },
+    {
+      "term": "Proxy",
+      "lang": "en",
+      "def": "Server o componente intermedio che si interpone tra client e server per gestire, filtrare o inoltrare le richieste."
+    },
+    {
+      "term": "RBAC",
+      "lang": "en",
+      "def": "(Role-Based Access Control) - Sistema di controllo degli accessi basato sui ruoli operativi assegnati agli utenti all'interno dell'applicazione."
+    },
+    {
+      "term": "Serverless",
+      "lang": "en",
+      "def": "Modello di cloud computing in cui il provider gestisce dinamicamente le risorse infrastrutturali, eseguendo il codice senza server fissi dedicati."
+    },
+    {
+      "term": "Test di integrazione",
+      "def": "Verifiche automatizzate che assicurano che diverse componenti o moduli di un sistema funzionino correttamente quando interagiscono tra loro."
+    },
+    {
+      "term": "Test End-to-End (E2E)",
+      "id": "test-e2e",
+      "def": "Test che simulano l'esperienza reale dell'utente, verificando il corretto funzionamento dell'intero flusso dell'applicazione dall'inizio alla fine."
+    },
+    {
+      "term": "Token",
+      "lang": "en",
+      "def": "Unità minima di testo (parola, frazione di parola o singolo carattere) in cui un LLM suddivide l'input e l'output per l'elaborazione."
+    },
+    {
+      "term": "Webhook",
+      "lang": "en",
+      "def": "Meccanismo che permette a un'applicazione di inviare notifiche o dati in tempo reale a un'altra applicazione non appena si verifica uno specifico evento."
     }
   ],
   "members": [
