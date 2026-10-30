@@ -68,6 +68,36 @@ window.SITE_DATA = {
           "name": "Verbale esterno 26/10/2026 Miriade firmato",
           "date": "2026-10-26",
           "url": "pdf/candidatura/verbali_esterni/2026-10-26-miriade-signed.pdf"
+        },
+        {
+          "cat": "Verbali interni",
+          "name": "Verbale interno 28/10/2026",
+          "date": "2026-10-28",
+          "url": "pdf/candidatura/verbali_interni/2026-10-28.pdf"
+        },
+        {
+          "cat": "Generale",
+          "name": "Analisi dei Capitolati",
+          "date": "2026-10-30",
+          "url": "pdf/candidatura/generali/analisi-dei-capitolati.pdf"
+        },
+        {
+          "cat": "Generale",
+          "name": "Dichiarazione degli Impegni",
+          "date": "2026-10-29",
+          "url": "pdf/candidatura/generali/Dichiarazione-degli-impegni.pdf"
+        },
+        {
+          "cat": "Generale",
+          "name": "Lettera di Presentazione",
+          "date": "2026-10-30",
+          "url": "pdf/candidatura/generali/lettera-di-presentazione.pdf"
+        },
+        {
+          "cat": "Generale",
+          "name": "Way of Working",
+          "date": "2026-10-29",
+          "url": "pdf/candidatura/generali/WoW.pdf"
         }
       ],
       "visible": true
