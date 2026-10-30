@@ -98,6 +98,12 @@ window.SITE_DATA = {
           "name": "Way of Working",
           "date": "2026-10-29",
           "url": "pdf/candidatura/generali/WoW.pdf"
+        },
+        {
+          "cat": "Verbali esterni",
+          "name": "Verbale esterno 26/10/2026 Var Group firmato",
+          "date": "2026-10-26",
+          "url": "pdf/candidatura/verbali_esterni/2026-10-26-vargroup-signed.pdf"
         }
       ],
       "visible": true
