@@ -23,7 +23,13 @@
   const b64ToText = (b) => new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\s/g, "")), (c) => c.charCodeAt(0)));
   const serialize = (d) => "/* File gestito dal pannello admin (admin.html): puoi anche modificarlo a mano, ma rispetta il formato JSON. */\nwindow.SITE_DATA = " + JSON.stringify(d, null, 2) + ";\n";
   const parse = (t) => JSON.parse(t.match(/window\.SITE_DATA\s*=\s*(\{[\s\S]*\})\s*;?\s*$/)[1]);
-  const setMsg = (node, text, kind = "") => { node.textContent = text; node.className = "msg" + (kind ? " " + kind : ""); };
+  const setMsg = (node, text, kind = "") => {
+    node.textContent = text; node.className = "msg" + (kind ? " " + kind : "");
+    if (node.id === "save-msg") {   // gli errori di salvataggio vengono letti subito e la barra si evidenzia
+      node.setAttribute("role", kind === "err" ? "alert" : "status");
+      node.closest(".admin-bar").classList.toggle("has-err", kind === "err");
+    }
+  };
   const fmtDate = (d) => (d ? new Date(d).toLocaleDateString("it-IT", { day: "2-digit", month: "short", year: "numeric" }) : "");
 
   async function api(path, opts = {}) {
@@ -56,7 +62,9 @@
   function updateDirty() {
     const d = dirty();
     $("btn-save").disabled = !d; $("btn-discard").disabled = !d;
-    if (d && !$("save-msg").textContent.startsWith("Modifiche")) setMsg($("save-msg"), "Modifiche non ancora pubblicate. Premi «Salva e pubblica» quando hai finito.");
+    // il promemoria non deve cancellare un errore di salvataggio (resta finché non si riprova), ma sostituisce i messaggi vecchi
+    const m = $("save-msg");
+    if (d && !m.classList.contains("err") && !m.textContent.startsWith("Modifiche non")) setMsg(m, "Modifiche non ancora pubblicate. Premi «Salva e pubblica» quando hai finito.");
   }
   addEventListener("beforeunload", (e) => { if (cfg && dirty()) { e.preventDefault(); e.returnValue = ""; } });
 

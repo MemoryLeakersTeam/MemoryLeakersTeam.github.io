@@ -26,6 +26,9 @@ legend { padding: 0 6px; font-size: .92rem; }
 .msg { min-height: 1.4em; margin-top: 12px; font-size: .95rem; }
 .msg.err { color: #8a2d2d; }
 .msg.ok { color: var(--accent-text); }
+.admin-bar .msg { flex-basis: 100%; margin: 0; min-height: 0; font-weight: 500; }
+.admin-bar .msg:empty { display: none; }
+.admin-bar.has-err { border-color: #8a2d2d; box-shadow: 0 0 0 2px rgba(138,45,45,.25); }
 .help { margin-top: 20px; }
 .help summary { cursor: pointer; color: var(--accent-text); text-underline-offset: 3px; text-decoration: underline; }
 .help ol { margin: 12px 0 12px 20px; display: grid; gap: 8px; }
