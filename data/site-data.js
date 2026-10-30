@@ -518,6 +518,162 @@ window.SITE_DATA = {
       "term": "Webhook",
       "lang": "en",
       "def": "Meccanismo che permette a un'applicazione di inviare notifiche o dati in tempo reale a un'altra applicazione non appena si verifica uno specifico evento."
+    },
+    {
+      "term": "Asana",
+      "lang": "en",
+      "def": "Applicazione web per la gestione dei progetti e delle attività di un team, organizzate in liste e bacheche."
+    },
+    {
+      "term": "Back-end",
+      "lang": "en",
+      "def": "Parte di un sistema software che lavora lato server, non visibile all'utente, e che gestisce dati, logica applicativa e comunicazione con altri servizi."
+    },
+    {
+      "term": "Brainstorming",
+      "lang": "en",
+      "def": "Tecnica di discussione di gruppo in cui i partecipanti propongono liberamente idee su un tema, da valutare in un secondo momento."
+    },
+    {
+      "term": "Branch",
+      "lang": "en",
+      "def": "Ramo di sviluppo di un repository Git che permette di lavorare su delle modifiche in modo isolato rispetto al ramo principale."
+    },
+    {
+      "term": "CLI",
+      "lang": "en",
+      "def": "(Command Line Interface) - Interfaccia testuale con cui l'utente interagisce con un programma digitando comandi nel terminale."
+    },
+    {
+      "term": "Conventional Commits",
+      "lang": "en",
+      "def": "Convenzione per scrivere i messaggi di commit secondo un formato standard (tipo, ambito e descrizione), che li rende chiari e leggibili anche in modo automatico."
+    },
+    {
+      "term": "Credito precaricato",
+      "def": "Somma versata in anticipo su un servizio a pagamento, ad esempio le API di un modello di IA, che viene scalata in base all'utilizzo."
+    },
+    {
+      "term": "Docker",
+      "lang": "en",
+      "def": "Piattaforma che permette di creare ed eseguire applicazioni all'interno di container, così da farle funzionare allo stesso modo su qualsiasi macchina."
+    },
+    {
+      "term": "FastMCP",
+      "lang": "en",
+      "def": "Libreria Python per sviluppare in modo semplice e rapido server e client basati sul protocollo MCP."
+    },
+    {
+      "term": "GitHub Pages",
+      "lang": "en",
+      "def": "Servizio di GitHub che pubblica gratuitamente un sito web statico a partire dai file contenuti in un repository."
+    },
+    {
+      "term": "Google Drive",
+      "lang": "en",
+      "def": "Servizio cloud di Google per archiviare, condividere e modificare file e documenti in modo collaborativo."
+    },
+    {
+      "term": "Google Meet",
+      "lang": "en",
+      "def": "Servizio di Google per videochiamate e riunioni online."
+    },
+    {
+      "term": "Guardrail",
+      "lang": "en",
+      "def": "Insieme di regole e controlli che limitano il comportamento di un sistema di IA, impedendogli di produrre risposte o compiere azioni non consentite."
+    },
+    {
+      "term": "KNX IoT",
+      "lang": "en",
+      "def": "Estensione dello standard KNX per la domotica che permette di controllare i dispositivi di un impianto tramite API REST accessibili via internet."
+    },
+    {
+      "term": "Microsoft To Do",
+      "lang": "en",
+      "def": "Applicazione di Microsoft per creare e organizzare liste di attività, personali o condivise."
+    },
+    {
+      "term": "Mock server",
+      "lang": "en",
+      "def": "Server fittizio che simula le risposte di un servizio reale, utile per sviluppare e testare un'applicazione senza dipendere dal servizio vero."
+    },
+    {
+      "term": "OpenAPI",
+      "lang": "en",
+      "def": "Standard per descrivere in un file (YAML o JSON) le API REST di un servizio: indirizzi, parametri e formato delle risposte."
+    },
+    {
+      "term": "Polling",
+      "lang": "en",
+      "def": "Tecnica in cui un client interroga periodicamente un servizio per sapere se il suo stato è cambiato."
+    },
+    {
+      "term": "Prism",
+      "lang": "en",
+      "def": "Strumento open-source che, a partire da una specifica OpenAPI, genera un mock server che simula le risposte delle API."
+    },
+    {
+      "term": "SAL",
+      "def": "(Stato Avanzamento Lavori) - Incontro periodico con il proponente in cui si presenta il lavoro svolto e si concordano i passi successivi."
+    },
+    {
+      "term": "Scope",
+      "lang": "en",
+      "def": "Insieme dei permessi associati a un accesso, ad esempio a un token, che stabilisce quali risorse e operazioni sono consentite."
+    },
+    {
+      "term": "SDK",
+      "lang": "en",
+      "def": "(Software Development Kit) - Insieme di librerie, strumenti e documentazione per sviluppare software per una specifica piattaforma o servizio."
+    },
+    {
+      "term": "Skill",
+      "lang": "en",
+      "def": "Insieme di istruzioni e risorse che un agente di IA può caricare per svolgere un compito specifico in modo guidato."
+    },
+    {
+      "term": "Stack di lavoro",
+      "def": "Insieme degli strumenti e delle tecnologie che il gruppo usa per sviluppare, documentare e coordinare il progetto."
+    },
+    {
+      "term": "Subscription",
+      "lang": "en",
+      "def": "Meccanismo in cui un client si registra presso un servizio per ricevere automaticamente una notifica a ogni cambiamento, senza doverlo interrogare periodicamente."
+    },
+    {
+      "term": "Telegram",
+      "lang": "en",
+      "def": "Applicazione di messaggistica istantanea che permette di creare gruppi e canali tematici."
+    },
+    {
+      "term": "Tool",
+      "lang": "en",
+      "def": "Funzione esterna che un modello di IA può invocare per compiere un'azione o recuperare informazioni, ad esempio interrogando un'API."
+    },
+    {
+      "term": "TUI",
+      "lang": "en",
+      "def": "(Text-based User Interface) - Interfaccia utente interattiva che funziona nel terminale, con menu e finestre composti da caratteri di testo."
+    },
+    {
+      "term": "Typst",
+      "def": "Linguaggio di markup e compilatore per la composizione tipografica di documenti, usato dal gruppo per redigere la documentazione."
+    },
+    {
+      "term": "VPN",
+      "lang": "en",
+      "def": "(Virtual Private Network) - Connessione cifrata che collega un dispositivo a una rete privata attraverso internet."
+    },
+    {
+      "term": "WhatsApp",
+      "lang": "en",
+      "def": "Applicazione di messaggistica istantanea per smartphone e computer."
+    },
+    {
+      "term": "YouTrack",
+      "lang": "en",
+      "def": "Strumento di JetBrains per il tracciamento delle issue e la gestione dei progetti secondo metodologie agili."
     }
   ],
   "members": [
