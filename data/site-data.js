@@ -91,8 +91,7 @@ window.SITE_DATA = {
           "cat": "Generale",
           "name": "Lettera di Presentazione",
           "date": "2026-10-30",
-          "url": "pdf/candidatura/generali/lettera-di-presentazione.pdf",
-          "pinned": true
+          "url": "pdf/candidatura/generali/lettera-di-presentazione.pdf"
         },
         {
           "cat": "Generale",
