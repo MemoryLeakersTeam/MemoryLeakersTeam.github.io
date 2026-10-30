@@ -164,15 +164,21 @@
     $("doc-list-title").textContent = `Documenti pubblicati · ${b.title}` + (b.visible ? "" : " (tappa nascosta: non visibile sul sito)");
     const cats = [...data.categories, ...new Set(b.items.map((i) => i.cat).filter((c) => !data.categories.includes(c)))];
     let any = false;
-    for (const c of cats) {
-      const items = b.items.map((it, idx) => ({ it, idx })).filter((x) => x.it.cat === c)
-        .sort((a, z) => (z.it.date || "").localeCompare(a.it.date || "") || a.it.name.localeCompare(z.it.name, "it")); // come sul sito: dal più recente
+    // stesso ordine del sito: in evidenza per primo, poi dal più recente
+    const byPriority = (a, z) => (z.it.pinned ? 1 : 0) - (a.it.pinned ? 1 : 0) || (z.it.date || "").localeCompare(a.it.date || "") || a.it.name.localeCompare(z.it.name, "it");
+    const entry = ({ it, idx }) => row(
+      el("b", {}, it.name),
+      [fmtDate(it.date), fmtDate(it.date) ? " · " : "", it.url, it.pinned ? el("span", { class: "tag" }, "in evidenza") : "",
+       !/^https?:/i.test(it.url) && repoPdfs.length && !repoPdfs.includes(it.url) ? el("span", { class: "tag" }, "file non trovato nel repository") : ""],
+      [btn(it.pinned ? "Togli evidenza" : "In evidenza", `${it.pinned ? "Togli dall'evidenza" : "Metti in evidenza"} ${it.name}`, () => { it.pinned = !it.pinned; if (!it.pinned) delete it.pinned; renderDocs(); updateDirty(); }),
+       btn("Modifica", `Modifica ${it.name}`, () => editDoc(idx)),
+       btn("Elimina", `Elimina ${it.name}`, () => { if (confirm(`Eliminare «${it.name}» dall'elenco?\n(Il file PDF resta nel repository.)`)) { b.items.splice(idx, 1); renderDocs(); updateDirty(); } }, "danger")]);
+    const all = b.items.map((it, idx) => ({ it, idx }));
+    const hasPin = (c) => all.some((x) => x.it.cat === c && x.it.pinned);
+    for (const c of [...cats].sort((c1, c2) => (hasPin(c2) ? 1 : 0) - (hasPin(c1) ? 1 : 0))) {
+      const items = all.filter((x) => x.it.cat === c).sort(byPriority);
       if (!items.length) continue; any = true;
-      box.append(el("div", { class: "list-group" }, c), el("div", { class: "list" }, items.map(({ it, idx }) => row(
-        el("b", {}, it.name),
-        [fmtDate(it.date), fmtDate(it.date) ? " · " : "", it.url, !/^https?:/i.test(it.url) && repoPdfs.length && !repoPdfs.includes(it.url) ? el("span", { class: "tag" }, "file non trovato nel repository") : ""],
-        [btn("Modifica", `Modifica ${it.name}`, () => editDoc(idx)),
-         btn("Elimina", `Elimina ${it.name}`, () => { if (confirm(`Eliminare «${it.name}» dall'elenco?\n(Il file PDF resta nel repository.)`)) { b.items.splice(idx, 1); renderDocs(); updateDirty(); } }, "danger")]))));
+      box.append(el("div", { class: "list-group" }, c), el("div", { class: "list" }, items.map(entry)));
     }
     if (!any) box.append(emptyNote("Nessun documento in questa tappa."));
     updateDirty();
@@ -201,7 +207,7 @@
   }
   function editDoc(idx) {
     const it = curBaseline().items[idx]; docEdit = idx;
-    $("d-name").value = it.name; $("d-date").value = it.date || ""; $("d-cat").value = it.cat;
+    $("d-name").value = it.name; $("d-date").value = it.date || ""; $("d-cat").value = it.cat; $("d-pin").checked = !!it.pinned;
     const ext = /^https?:/i.test(it.url);
     document.querySelector(`input[name=d-src][value=${ext ? "url" : "repo"}]`).checked = true;
     $("src-repo").hidden = ext; $("src-url").hidden = !ext; $("d-url").value = ext ? it.url : ""; fillRepoSelect(ext ? "" : it.url);
@@ -223,7 +229,7 @@
         url = $("d-url").value.trim();
         if (!/^https?:\/\/\S+$/i.test(url)) throw new Error("Inserisci un indirizzo che inizi con http:// o https://.");
       }
-      const item = { cat, name, date: $("d-date").value || "", url };
+      const item = { cat, name, date: $("d-date").value || "", url, ...($("d-pin").checked ? { pinned: true } : {}) };
       if (old) b.items[docEdit] = item; else b.items.push(item);
       setMsg(msg, old ? "Documento aggiornato." : "Documento aggiunto all'elenco.", "ok");
       resetDocForm(); renderDocs(); $("d-name").focus();

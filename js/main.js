@@ -20,12 +20,16 @@
     tl.innerHTML = data.baselines.filter((b) => b.visible !== false).map((b, i) => {
       const items = b.items || [];
       const order = [...cats, ...new Set(items.map((x) => x.cat).filter((c) => !cats.includes(c)))];
-      const body = order.map((c) => {
-        const list = items.filter((x) => x.cat === c).sort((a, b2) => (b2.date || "").localeCompare(a.date || "") || a.name.localeCompare(b2.name, "it")); // dal più recente; senza data in fondo
+      // priorità: dentro la categoria il documento in evidenza viene per primo, poi dal più recente (senza data in fondo)
+      const byPriority = (x, y) => (y.pinned ? 1 : 0) - (x.pinned ? 1 : 0) || (y.date || "").localeCompare(x.date || "") || x.name.localeCompare(y.name, "it");
+      const hasPin = (c) => items.some((x) => x.cat === c && x.pinned);
+      // le categorie con un documento in evidenza salgono in cima alla tappa (l'ordine resta stabile per le altre)
+      const body = [...order].sort((c1, c2) => (hasPin(c2) ? 1 : 0) - (hasPin(c1) ? 1 : 0)).map((c) => {
+        const list = items.filter((x) => x.cat === c).sort(byPriority);
         if (!list.length) return "";
         return `<div class="group-title">${esc(c)}</div>` + list.map((it) => {
           const url = safeUrl(it.url), isPdf = /\.pdf($|[?#])/i.test(it.url || "");
-          return `<a class="doc" href="${esc(url)}" target="_blank" rel="noopener"><span>${esc(it.name)}</span><small>${when(it.date)}${it.date ? " · " : ""}${isPdf ? "PDF" : "Link"}${NEWTAB}</small></a>`;
+          return `<a class="doc${it.pinned ? " pinned" : ""}" href="${esc(url)}" target="_blank" rel="noopener"><span>${esc(it.name)}${it.pinned ? ' <em class="pin-tag">In evidenza</em>' : ""}</span><small>${when(it.date)}${it.date ? " · " : ""}${isPdf ? "PDF" : "Link"}${NEWTAB}</small></a>`;
         }).join("");
       }).join("");
       const badge = items.length ? `${items.length} ${items.length === 1 ? "documento" : "documenti"}` : "Nessun documento";
