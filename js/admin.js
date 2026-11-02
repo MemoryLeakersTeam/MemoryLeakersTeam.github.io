@@ -56,6 +56,7 @@
     d.categories ||= ["Generale", "Documenti esterni", "Documenti interni", "Verbali esterni", "Verbali interni", "Diapositive"];
     d.baselines ||= []; d.baselines.forEach((b) => { b.items ||= []; b.visible ??= true; });
     d.glossary ||= []; d.members ||= []; d.contacts ||= [];
+    d.esclusi ||= []; // documenti di Documenti eliminati qui: tools/sync_documenti.py non li ripubblica
     return d;
   };
   const dirty = () => JSON.stringify(data) !== original;
@@ -177,10 +178,18 @@
     const entry = ({ it, idx }) => row(
       el("b", {}, it.name),
       [fmtDate(it.date), fmtDate(it.date) ? " · " : "", it.url, it.pinned ? el("span", { class: "tag" }, "in evidenza") : "",
+       it.sorgente ? el("span", { class: "tag", title: it.sorgente }, "da Documenti" + (/^\d+\.\d+/.test(it.versione || "") ? ` · v${it.versione}` : "")) : "",
        !/^https?:/i.test(it.url) && repoPdfs.length && !repoPdfs.includes(it.url) ? el("span", { class: "tag" }, "file non trovato nel repository") : ""],
       [btn(it.pinned ? "Togli evidenza" : "In evidenza", `${it.pinned ? "Togli dall'evidenza" : "Metti in evidenza"} ${it.name}`, () => { it.pinned = !it.pinned; if (!it.pinned) delete it.pinned; renderDocs(); updateDirty(); }),
        btn("Modifica", `Modifica ${it.name}`, () => editDoc(idx)),
-       btn("Elimina", `Elimina ${it.name}`, () => { if (confirm(`Eliminare «${it.name}» dall'elenco?\n(Il file PDF resta nel repository.)`)) { b.items.splice(idx, 1); renderDocs(); updateDirty(); } }, "danger")]);
+       btn("Elimina", `Elimina ${it.name}`, () => {
+         const auto = !!it.sorgente;
+         const note = auto ? "Arriva dal repository Documenti: non verrà più pubblicato in automatico finché non lo ripristini dall'elenco «Esclusi dalla pubblicazione automatica»." : "(Il file PDF resta nel repository.)";
+         if (!confirm(`Eliminare «${it.name}» dall'elenco?\n${note}`)) return;
+         b.items.splice(idx, 1);
+         if (auto && !data.esclusi.includes(it.url)) data.esclusi.push(it.url);
+         renderDocs(); updateDirty();
+       }, "danger")]);
     const all = b.items.map((it, idx) => ({ it, idx }));
     const hasPin = (c) => all.some((x) => x.it.cat === c && x.it.pinned);
     for (const c of [...cats].sort((c1, c2) => (hasPin(c2) ? 1 : 0) - (hasPin(c1) ? 1 : 0))) {
@@ -189,6 +198,9 @@
       box.append(el("div", { class: "list-group" }, c), el("div", { class: "list" }, items.map(entry)));
     }
     if (!any) box.append(emptyNote("Nessun documento in questa tappa."));
+    $("excl-box").hidden = !data.esclusi.length;
+    $("excl-list").replaceChildren(el("div", { class: "list" }, data.esclusi.map((u) => row(el("b", {}, u.split("/").pop()), u,
+      [btn("Ripristina", `Ripristina la pubblicazione automatica di ${u}`, () => { data.esclusi = data.esclusi.filter((x) => x !== u); renderDocs(); })]))));
     updateDirty();
   }
   function renderVisibility() {
@@ -237,7 +249,14 @@
         url = $("d-url").value.trim();
         if (!/^https?:\/\/\S+$/i.test(url)) throw new Error("Inserisci un indirizzo che inizi con http:// o https://.");
       }
-      const item = { cat, name, date: $("d-date").value || "", url, ...($("d-pin").checked ? { pinned: true } : {}) };
+      // si parte dalla voce esistente per non perdere i campi scritti da tools/sync_documenti.py (sorgente, versione)
+      const item = { ...(old || {}), cat, name, date: $("d-date").value || "", url };
+      if ($("d-pin").checked) item.pinned = true; else delete item.pinned;
+      if (old && old.sorgente) {
+        // con un altro file la voce diventa manuale; un nome cambiato qui non viene più sovrascritto dalla sincronizzazione
+        if (url !== old.url) { delete item.sorgente; delete item.versione; delete item.nomeManuale; }
+        else if (name !== old.name) item.nomeManuale = true;
+      }
       if (old) b.items[docEdit] = item; else b.items.push(item);
       setMsg(msg, old ? "Documento aggiornato." : "Documento aggiunto all'elenco.", "ok");
       resetDocForm(); renderDocs(); $("d-name").focus();
