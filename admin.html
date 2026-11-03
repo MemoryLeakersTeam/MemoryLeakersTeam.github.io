@@ -113,7 +113,7 @@
                 <label>File PDF
                   <select id="d-repofile"></select>
                 </label>
-                <p class="hint" id="d-repo-hint">I PDF si caricano a mano nella cartella <code>pdf/</code> del repository (per esempio in <code>pdf/rtb/documenti-esterni/</code>) e poi si collegano qui.</p>
+                <p class="hint" id="d-repo-hint">I documenti approvati del repository Documenti vengono pubblicati da soli (etichetta «da Documenti»). Gli altri PDF si caricano a mano nella cartella <code>pdf/</code> del repository (per esempio in <code>pdf/rtb/documenti-esterni/</code>) e poi si collegano qui.</p>
                 <button type="button" class="btn ghost small" id="d-refresh">Aggiorna l'elenco dei PDF</button>
               </div>
               <div id="src-url" hidden><label>Indirizzo<input id="d-url" type="url" placeholder="https://…"></label></div>
@@ -127,6 +127,11 @@
         </div>
         <h2 class="card-title" id="doc-list-title">Documenti pubblicati</h2>
         <div id="doc-list"></div>
+        <div id="excl-box" hidden>
+          <h2 class="card-title">Esclusi dalla pubblicazione automatica</h2>
+          <p class="hint">Documenti del repository Documenti eliminati da questo pannello: non vengono ripubblicati finché non li ripristini.</p>
+          <div id="excl-list"></div>
+        </div>
       </section>
 
       <!-- GLOSSARIO -->
