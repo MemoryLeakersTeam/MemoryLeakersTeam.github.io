@@ -17,6 +17,7 @@
   const tl = $("timeline");
   if (tl) {
     const cats = data.categories || [];
+    // le tappe si mostrano nell'ordine dei dati (lo si cambia dal pannello admin), senza numeri
     tl.innerHTML = data.baselines.filter((b) => b.visible !== false).map((b, i) => {
       const items = b.items || [];
       const order = [...cats, ...new Set(items.map((x) => x.cat).filter((c) => !cats.includes(c)))];
@@ -36,7 +37,6 @@
       return `
       <details class="baseline" ${i === 0 ? "open" : ""} id="${esc(b.id)}">
         <summary>
-          <div class="step" aria-hidden="true">${esc(b.step)}</div>
           <div><h3><span${langAttr(b.titleLang)}>${esc(b.title)}</span><span class="badge">${badge}</span></h3><div class="sub">${esc(b.sub)}</div></div>
           <svg class="chev" aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m6 9 6 6 6-6"/></svg>
         </summary>

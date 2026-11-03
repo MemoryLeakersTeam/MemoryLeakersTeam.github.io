@@ -78,20 +78,16 @@ details.baseline {
 }
 details.baseline[open] { box-shadow: 0 14px 40px -22px rgba(38,57,58,.35); }
 details.baseline > summary {
-  list-style: none; cursor: pointer; display: grid; grid-template-columns: 44px 1fr auto; gap: 18px;
+  list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: 18px;
   align-items: center; padding: 22px 26px;
 }
 details.baseline > summary::-webkit-details-marker { display: none; }
-.step {
-  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
-  border: 1px solid var(--accent-soft); color: var(--accent-text); font-family: var(--serif);
-}
 .baseline h3 { font-family: var(--serif); font-weight: 400; font-size: 1.25rem; }
 .baseline .sub { color: var(--muted); font-size: .9rem; }
 .chev { transition: transform .25s; color: var(--muted); }
 details[open] .chev { transform: rotate(180deg); }
 .badge { font-size: .72rem; padding: 3px 10px; border-radius: 99px; background: rgba(79,138,132,.14); color: var(--accent-text); margin-left: 8px; vertical-align: middle; }
-.baseline .body { padding: 0 26px 24px 88px; }
+.baseline .body { padding: 0 26px 24px; }
 .group-title { font-size: .72rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin: 18px 0 6px; }
 .doc {
   display: flex; justify-content: space-between; gap: 16px; padding: 11px 0;
@@ -157,7 +153,7 @@ footer a:hover { color: var(--ink); }
 }
 @media (max-width: 640px) {
   .baseline .body { padding-left: 26px; }
-  details.baseline > summary { grid-template-columns: 38px 1fr auto; gap: 12px; padding: 18px; }
+  details.baseline > summary { gap: 12px; padding: 18px; }
   .nav { padding-top: 14px; padding-bottom: 14px; }
   .brand { font-size: 1rem; }
 }
@@ -190,7 +186,7 @@ main:focus { outline: none; }
 .hero-text { display: flex; flex-direction: column; align-items: center; }
 .scroll-hint { display: none; }
 @media (forced-colors: active) {
-  .badge, .step, .motion-btn, .menu-btn { border: 1px solid CanvasText; }
+  .badge, .motion-btn, .menu-btn { border: 1px solid CanvasText; }
 }
 
 /* ---------- logo, pulsanti ---------- */

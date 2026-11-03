@@ -48,5 +48,7 @@ code { background: rgba(38,57,58,.08); padding: 1px 6px; border-radius: 6px; fon
 .list-group { font-size: .78rem; text-transform: uppercase; letter-spacing: .13em; color: var(--muted); margin: 18px 0 6px; }
 
 .vis { border: 0; padding: 0; display: grid; gap: 6px; }
+.vis-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 12px; }
+.vis-row .actions { display: flex; gap: 6px; }
 .vis .check { display: flex; align-items: center; gap: 10px; min-height: 36px; cursor: pointer; }
 .vis input { width: 24px; height: 24px; accent-color: var(--accent-text); flex: none; }

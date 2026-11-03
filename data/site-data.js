@@ -10,8 +10,31 @@ window.SITE_DATA = {
   ],
   "baselines": [
     {
+      "id": "rtb",
+      "title": "Requirements & Technology Baseline",
+      "titleLang": "en",
+      "sub": "RTB: requisiti e tecnologie",
+      "items": [],
+      "visible": true
+    },
+    {
+      "id": "poc",
+      "title": "Proof of Concept",
+      "titleLang": "en",
+      "sub": "PoC: prototipo che dimostra la fattibilità tecnica",
+      "items": [],
+      "visible": false
+    },
+    {
+      "id": "pb",
+      "title": "Product Baseline",
+      "titleLang": "en",
+      "sub": "PB: prodotto finale",
+      "items": [],
+      "visible": false
+    },
+    {
       "id": "candidatura",
-      "step": "1",
       "title": "Candidatura",
       "sub": "Presentazione del gruppo e scelta del capitolato",
       "items": [
@@ -108,33 +131,6 @@ window.SITE_DATA = {
         }
       ],
       "visible": true
-    },
-    {
-      "id": "rtb",
-      "step": "2",
-      "title": "Requirements & Technology Baseline",
-      "titleLang": "en",
-      "sub": "RTB: requisiti e tecnologie",
-      "items": [],
-      "visible": false
-    },
-    {
-      "id": "poc",
-      "step": "3",
-      "title": "Proof of Concept",
-      "titleLang": "en",
-      "sub": "PoC: prototipo che dimostra la fattibilità tecnica",
-      "items": [],
-      "visible": false
-    },
-    {
-      "id": "pb",
-      "step": "4",
-      "title": "Product Baseline",
-      "titleLang": "en",
-      "sub": "PB: prodotto finale",
-      "items": [],
-      "visible": false
     }
   ],
   "glossary": [

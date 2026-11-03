@@ -191,12 +191,22 @@
     if (!any) box.append(emptyNote("Nessun documento in questa tappa."));
     updateDirty();
   }
+  function moveStage(i, dir) {
+    move(data.baselines, i, dir); renderVisibility(); renderDocs(); updateDirty();
+    const row = $("vis-list").querySelectorAll(".vis-row")[i + dir];   // il focus segue la tappa spostata
+    const target = row && [...row.querySelectorAll("button")].find((x) => x.textContent === (dir < 0 ? "↑" : "↓")) || (row && row.querySelector("button"));
+    if (target) target.focus();
+  }
   function renderVisibility() {
-    $("vis-list").replaceChildren($("vis-list").firstElementChild, ...data.baselines.map((b) => {
+    $("vis-list").replaceChildren($("vis-list").firstElementChild, ...data.baselines.map((b, i) => {
       const cb = el("input", { type: "checkbox", id: "vis-" + b.id });
       cb.checked = b.visible;
       cb.addEventListener("change", () => { b.visible = cb.checked; renderDocs(); updateDirty(); });
-      return el("label", { class: "check", for: "vis-" + b.id }, cb, `${b.title}`, el("span", { class: "opt" }, ` · ${b.items.length} ${b.items.length === 1 ? "documento" : "documenti"}`));
+      return el("div", { class: "vis-row" },
+        el("label", { class: "check", for: "vis-" + b.id }, cb, `${b.title}`, el("span", { class: "opt" }, ` · ${b.items.length} ${b.items.length === 1 ? "documento" : "documenti"}`)),
+        el("span", { class: "actions" },
+          btn("↑", `Sposta ${b.title} più in alto sul sito`, () => moveStage(i, -1)),
+          btn("↓", `Sposta ${b.title} più in basso sul sito`, () => moveStage(i, 1))));
     }));
   }
   $("d-baseline").addEventListener("change", renderDocs);
