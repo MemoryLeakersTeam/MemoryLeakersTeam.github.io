@@ -42,92 +42,138 @@ window.SITE_DATA = {
           "cat": "Verbali interni",
           "name": "Verbale interno 13/10/2026",
           "date": "2026-10-13",
-          "url": "pdf/candidatura/verbali_interni/2026-10-13.pdf"
+          "url": "pdf/candidatura/verbali_interni/2026-10-13.pdf",
+          "sorgente": "Candidatura/Verbali_interni/2026-10-13.typ",
+          "versione": "1.0.1"
         },
         {
           "cat": "Verbali interni",
           "name": "Verbale interno 19/10/2026",
           "date": "2026-10-19",
-          "url": "pdf/candidatura/verbali_interni/2026-10-19.pdf"
+          "url": "pdf/candidatura/verbali_interni/2026-10-19.pdf",
+          "sorgente": "Candidatura/Verbali_interni/2026-10-19.typ",
+          "versione": "1.0.1"
         },
         {
           "cat": "Verbali interni",
           "name": "Verbale interno 20/10/2026",
           "date": "2026-10-20",
-          "url": "pdf/candidatura/verbali_interni/2026-10-20.pdf"
+          "url": "pdf/candidatura/verbali_interni/2026-10-20.pdf",
+          "sorgente": "Candidatura/Verbali_interni/2026-10-20.typ",
+          "versione": "1.0.0"
         },
         {
           "cat": "Verbali interni",
           "name": "Verbale interno 23/10/2026",
           "date": "2026-10-23",
-          "url": "pdf/candidatura/verbali_interni/2026-10-23.pdf"
+          "url": "pdf/candidatura/verbali_interni/2026-10-23.pdf",
+          "sorgente": "Candidatura/Verbali_interni/2026-10-23.typ",
+          "versione": "1.0.0"
         },
         {
           "cat": "Verbali interni",
           "name": "Verbale interno 26/10/2026",
           "date": "2026-10-26",
-          "url": "pdf/candidatura/verbali_interni/2026-10-26.pdf"
+          "url": "pdf/candidatura/verbali_interni/2026-10-26.pdf",
+          "sorgente": "Candidatura/Verbali_interni/2026-10-26.typ",
+          "versione": "1.0.0"
         },
         {
           "cat": "Verbali interni",
           "name": "Verbale interno 27/10/2026",
           "date": "2026-10-27",
-          "url": "pdf/candidatura/verbali_interni/2026-10-27.pdf"
+          "url": "pdf/candidatura/verbali_interni/2026-10-27.pdf",
+          "sorgente": "Candidatura/Verbali_interni/2026-10-27.typ",
+          "versione": "1.0.0"
         },
         {
           "cat": "Verbali esterni",
           "name": "Verbale esterno 22/10/2026 Vimar firmato",
           "date": "2026-10-22",
-          "url": "pdf/candidatura/verbali_esterni/2026-10-22-vimar-signed.pdf"
+          "url": "pdf/candidatura/verbali_esterni/2026-10-22-vimar-signed.pdf",
+          "sorgente": "Candidatura/Verbali_esterni/2026-10-22-vimar.typ",
+          "versione": "1.1.0"
         },
         {
           "cat": "Verbali esterni",
           "name": "Verbale esterno 22/10/2026 Ergon firmato",
           "date": "2026-10-22",
-          "url": "pdf/candidatura/verbali_esterni/2026-10-22-ergon-signed.pdf"
+          "url": "pdf/candidatura/verbali_esterni/2026-10-22-ergon-signed.pdf",
+          "sorgente": "Candidatura/Verbali_esterni/2026-10-22-ergon.typ",
+          "versione": "1.0.0"
         },
         {
           "cat": "Verbali esterni",
           "name": "Verbale esterno 26/10/2026 Miriade firmato",
           "date": "2026-10-26",
-          "url": "pdf/candidatura/verbali_esterni/2026-10-26-miriade-signed.pdf"
+          "url": "pdf/candidatura/verbali_esterni/2026-10-26-miriade-signed.pdf",
+          "sorgente": "Candidatura/Verbali_esterni/2026-10-26-miriade.typ",
+          "versione": "1.0.0"
         },
         {
           "cat": "Verbali interni",
           "name": "Verbale interno 28/10/2026",
           "date": "2026-10-28",
-          "url": "pdf/candidatura/verbali_interni/2026-10-28.pdf"
+          "url": "pdf/candidatura/verbali_interni/2026-10-28.pdf",
+          "sorgente": "Candidatura/Verbali_interni/2026-10-28.typ",
+          "versione": "1.0.0"
         },
         {
           "cat": "Generale",
           "name": "Analisi dei Capitolati",
           "date": "2026-10-30",
-          "url": "pdf/candidatura/generali/analisi-dei-capitolati.pdf"
+          "url": "pdf/candidatura/generali/analisi-dei-capitolati.pdf",
+          "sorgente": "Candidatura/Generali/analisi-dei-capitolati.typ",
+          "versione": "1.0.0"
         },
         {
           "cat": "Generale",
           "name": "Dichiarazione degli Impegni",
           "date": "2026-10-29",
-          "url": "pdf/candidatura/generali/Dichiarazione-degli-impegni.pdf"
+          "url": "pdf/candidatura/generali/Dichiarazione-degli-impegni.pdf",
+          "sorgente": "Candidatura/Generali/Dichiarazione-degli-impegni.typ",
+          "versione": "1.0.0"
         },
         {
           "cat": "Generale",
           "name": "Lettera di Presentazione",
           "date": "2026-10-30",
           "url": "pdf/candidatura/generali/lettera-di-presentazione.pdf",
-          "pinned": true
+          "pinned": true,
+          "sorgente": "Candidatura/Generali/lettera-di-presentazione.typ",
+          "versione": "1.0.0"
         },
         {
           "cat": "Generale",
           "name": "Way of Working",
           "date": "2026-10-29",
-          "url": "pdf/candidatura/generali/WoW.pdf"
+          "url": "pdf/candidatura/generali/WoW.pdf",
+          "sorgente": "Candidatura/Generali/WoW.typ",
+          "versione": "1.0.0"
         },
         {
           "cat": "Verbali esterni",
           "name": "Verbale esterno 26/10/2026 Var Group firmato",
           "date": "2026-10-26",
-          "url": "pdf/candidatura/verbali_esterni/2026-10-26-vargroup-signed.pdf"
+          "url": "pdf/candidatura/verbali_esterni/2026-10-26-vargroup-signed.pdf",
+          "sorgente": "Candidatura/Verbali_esterni/2026-10-26-vargroup.typ",
+          "versione": "1.0.2"
+        },
+        {
+          "cat": "Diapositive",
+          "name": "Diario di bordo 26/10/2026",
+          "date": "2026-10-26",
+          "url": "pdf/candidatura/diario_di_bordo/2026-10-26.pdf",
+          "sorgente": "Candidatura/Diario_di_bordo/2026-10-26.pdf",
+          "versione": "1875bdbd"
+        },
+        {
+          "cat": "Diapositive",
+          "name": "Diario di bordo 02/11/2026",
+          "date": "2026-11-02",
+          "url": "pdf/candidatura/diario_di_bordo/2026-11-02.pdf",
+          "sorgente": "Candidatura/Diario_di_bordo/2026-11-02.pdf",
+          "versione": "8dd7d92d"
         }
       ],
       "visible": true
