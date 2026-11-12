@@ -230,3 +230,26 @@ a.inline:hover { color: var(--ink); }
 /* ---------- documenti in evidenza ---------- */
 a.doc.pinned > span { font-weight: 500; }
 .pin-tag { font-style: normal; font-weight: 500; font-size: .72rem; margin-left: 8px; padding: 2px 9px; border-radius: 99px; background: rgba(79,138,132,.16); color: var(--accent-text); vertical-align: middle; white-space: nowrap; }
+
+/* ---------- ore produttive ---------- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 6px 0 22px; }
+.stat { padding: 20px 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); display: grid; gap: 6px; align-content: start; }
+.stat-k { font-size: .78rem; text-transform: uppercase; letter-spacing: .13em; color: var(--muted); }
+.stat-v { font-family: var(--serif); font-size: 1.9rem; line-height: 1.2; }
+.stat-v small { font-family: var(--font); font-size: .9rem; color: var(--muted); }
+.hint { color: var(--muted); font-size: .88rem; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.ore-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.ore-table th, .ore-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.ore-table tbody tr:last-child > * { border-bottom: 0; }
+.ore-table thead th { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 500; white-space: nowrap; }
+.ore-table tbody th { font-weight: 500; }
+.ore-table .n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ore-table .bar-cell { min-width: 120px; width: 28%; }
+.ore-table a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+.ore-table tr[aria-current="true"] > * { background: rgba(79,138,132,.12); }
+progress { width: 100%; height: 10px; accent-color: var(--accent-text); }
+.csv-box { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 26px 0; }
+.csv-box select { font: inherit; color: var(--ink); background: #fff; border: 1px solid #8fa3a5; border-radius: 10px; padding: 10px 12px; min-height: 44px; }
+.csv-box select:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 1px; }
+.all-entries summary { cursor: pointer; color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; margin-bottom: 12px; }
