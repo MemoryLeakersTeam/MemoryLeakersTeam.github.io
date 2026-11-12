@@ -6,7 +6,7 @@
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   // accetta solo http(s), mailto o percorsi relativi (niente javascript:)
   const safeUrl = (u) => (/^(?:https?:|mailto:)/i.test(u) || !/^[a-z][a-z0-9+.-]*:/i.test(u || "") ? encodeURI(decodeURI(u || "#")) : "#");
-  const fmt = (d) => new Date(d).toLocaleDateString("it-IT", { day: "2-digit", month: "short", year: "numeric" });
+  const fmt = (d) => (/^\d{4}-\d{2}-\d{2}/.test(d) ? String(d).slice(0, 10) : d); // date in formato AAAA-MM-GG
   const when = (d) => (d ? `<time datetime="${esc(d)}">${fmt(d)}</time>` : "");
   const langAttr = (l) => (l ? ` lang="${esc(l)}"` : "");
   const NEWTAB = '<span class="sr-only"> (si apre in una nuova scheda)</span>';
