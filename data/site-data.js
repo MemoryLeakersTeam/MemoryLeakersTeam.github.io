@@ -14,7 +14,16 @@ window.SITE_DATA = {
       "title": "Requirements & Technology Baseline",
       "titleLang": "en",
       "sub": "RTB: requisiti e tecnologie",
-      "items": [],
+      "items": [
+        {
+          "cat": "Diapositive",
+          "name": "Diario di bordo 09/11/2026",
+          "date": "2026-11-09",
+          "url": "pdf/rtb/diario_di_bordo/2026-11-09.pdf",
+          "sorgente": "RTB/Diario_di_bordo/2026-11-09.pdf",
+          "versione": "bc70aac9"
+        }
+      ],
       "visible": true
     },
     {
