@@ -5,7 +5,7 @@
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const num = (n) => (Math.round(n * 100) / 100).toLocaleString("it-IT");
   const euro = (n) => n.toLocaleString("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
-  const day = (d) => new Date(d + "T12:00:00").toLocaleDateString("it-IT", { day: "2-digit", month: "short", year: "numeric" });
+  const day = (d) => (/^\d{4}-\d{2}-\d{2}/.test(d) ? String(d).slice(0, 10) : d); // date in formato AAAA-MM-GG
   const today = () => { const t = new Date(); return `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, "0")}-${String(t.getDate()).padStart(2, "0")}`; };
   const sum = (a) => a.reduce((x, y) => x + y, 0);
 
