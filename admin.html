@@ -25,6 +25,7 @@
         <li><a href="/#poc">PoC</a></li>
         <li><a href="/#pb">PB</a></li>
         <li><a href="/glossario">Glossario</a></li>
+        <li><a href="/ore">Ore</a></li>
         <li><a href="/chi-siamo">Chi siamo</a></li>
         <li><a href="/contatti">Contatti</a></li>
       </ul>
@@ -79,6 +80,7 @@
         <button role="tab" type="button" id="t-glo" aria-controls="p-glo" aria-selected="false" tabindex="-1">Glossario</button>
         <button role="tab" type="button" id="t-mem" aria-controls="p-mem" aria-selected="false" tabindex="-1">Componenti</button>
         <button role="tab" type="button" id="t-con" aria-controls="p-con" aria-selected="false" tabindex="-1">Contatti</button>
+        <button role="tab" type="button" id="t-ore" aria-controls="p-ore" aria-selected="false" tabindex="-1">Ore</button>
       </div>
 
       <!-- DOCUMENTI -->
@@ -193,6 +195,30 @@
         <h2 class="card-title">Contatti del gruppo</h2>
         <div id="c-list"></div>
       </section>
+
+      <!-- ORE PRODUTTIVE -->
+      <section role="tabpanel" id="p-ore" aria-labelledby="t-ore" tabindex="0" hidden>
+        <p class="hint">Le ore si pubblicano subito (un commit su <code>data/ore.json</code>), senza usare «Salva e pubblica». Si registrano solo le ore produttive svolte dal 3 novembre 2026: le riunioni non contano. Il riepilogo pubblico è nella pagina <a href="/ore">Ore</a>.</p>
+        <div class="card">
+          <h2 class="card-title">Registra ore</h2>
+          <form id="o-form" class="form" autocomplete="off">
+            <label>Componente<select id="o-persona" required></select></label>
+            <label>Data<input id="o-data" type="date" required></label>
+            <label>Ruolo<select id="o-ruolo" required></select></label>
+            <label>Ore <span class="opt">(a passi di 0,5)</span><input id="o-ore" type="number" required min="0.5" max="12" step="0.5" inputmode="decimal"></label>
+            <fieldset>
+              <legend>Issue collegata <span class="opt">(facoltativa)</span></legend>
+              <label>Repository<select id="o-repo"><option value="">Nessuna issue</option><option>Documenti</option><option>MemoryLeakersTeam.github.io</option></select></label>
+              <label>Numero<input id="o-issue" type="number" min="1" step="1" inputmode="numeric"></label>
+            </fieldset>
+            <label>Nota <span class="opt">(facoltativa)</span><input id="o-nota" maxlength="120"></label>
+            <div class="row"><button class="btn" type="submit" id="o-submit">Registra ore</button></div>
+          </form>
+          <p id="o-msg" class="msg" role="alert"></p>
+        </div>
+        <h2 class="card-title" id="o-list-title">Registrazioni</h2>
+        <div id="o-list"></div>
+      </section>
     </div>
   </main>
 
@@ -201,6 +227,7 @@
   <script src="data/site-data.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/slug.js"></script>
+  <script src="js/ore.js"></script>
   <script src="js/admin.js"></script>
 </body>
 </html>
