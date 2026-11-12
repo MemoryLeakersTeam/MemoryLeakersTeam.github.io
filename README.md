@@ -38,6 +38,7 @@ Il repository [Documenti](https://github.com/MemoryLeakersTeam/Documenti) compil
 
 - Si pubblicano solo i documenti con stato «Approvato»; i verbali esterni solo quando c'è la versione firmata (`*-signed.pdf`).
 - Un PDF già pubblicato viene sostituito solo quando cambia la `versione` del documento; i verbali firmati non vengono mai sostituiti né rimossi.
+- Un documento già pubblicato che torna in revisione (per esempio «Verificato» dopo una modifica) resta sul sito nella sua ultima versione approvata, finché il Responsabile non lo rilascia di nuovo; si rimuove solo se il suo sorgente viene cancellato da Documenti. Il riepilogo lo elenca tra i «Mantenuti all'ultima versione approvata».
 - Un documento senza metadati o con dati non validi (cartella o tappa sconosciuta, data mancante) viene saltato con un avviso nella pagina del workflow: non si pubblica e, se era già online, resta com'è. Gli altri documenti si pubblicano lo stesso.
 - Un documento spostato in un'altra cartella o tappa sposta la sua voce sul sito, senza duplicarla.
 - Percorsi e nomi: `Candidatura/Verbali_interni/2026-10-13.typ` → `pdf/candidatura/verbali_interni/2026-10-13.pdf`, «Verbale interno 13/10/2026». Le categorie: `Verbali_interni` → Verbali interni, `Verbali_esterni` → Verbali esterni, `Generali` → Generale, `Diario_di_bordo` → Diapositive.
