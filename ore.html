@@ -54,7 +54,7 @@
 
       <h2 class="sub-title">Per componente</h2>
       <div class="table-wrap"><table class="ore-table">
-        <thead><tr><th scope="col">Componente</th><th scope="col" class="n">Svolte</th><th scope="col" class="n">Previste</th><th scope="col" class="n">Residue</th><th scope="col"><span class="sr-only">Avanzamento</span></th></tr></thead>
+        <thead><tr><th scope="col">Componente</th><th scope="col" class="n">Svolte</th><th scope="col" class="n">Residue</th><th scope="col"><span class="sr-only">Avanzamento</span></th></tr></thead>
         <tbody id="ore-persone"></tbody>
       </table></div>
 
@@ -64,9 +64,15 @@
         <tbody id="ore-ruoli"></tbody>
       </table></div>
 
+      <h2 class="sub-title">Andamento</h2>
+      <figure class="chart">
+        <svg id="ore-chart" viewBox="0 0 720 300" role="img" aria-labelledby="ore-chart-title"><title id="ore-chart-title">Ore cumulate per sprint</title></svg>
+        <figcaption class="hint"><span class="key key-real"></span> Ore svolte, cumulate <span class="key key-plan"></span> Andamento lineare verso il totale previsto (indicativo, non è il piano del Piano di Progetto). I valori sono nella tabella «Per sprint».</figcaption>
+      </figure>
+
       <h2 class="sub-title">Per sprint</h2>
       <div class="table-wrap"><table class="ore-table">
-        <thead><tr><th scope="col">Sprint</th><th scope="col">Periodo</th><th scope="col" class="n">Ore svolte</th><th scope="col" class="n">Registrazioni</th></tr></thead>
+        <thead><tr><th scope="col">Sprint</th><th scope="col">Periodo</th><th scope="col" class="n">Ore svolte</th><th scope="col" class="n">Cumulate</th><th scope="col" class="n">Registrazioni</th></tr></thead>
         <tbody id="ore-sprint"></tbody>
       </table></div>
 

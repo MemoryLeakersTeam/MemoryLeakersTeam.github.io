@@ -253,3 +253,15 @@ progress { width: 100%; height: 10px; accent-color: var(--accent-text); }
 .csv-box select { font: inherit; color: var(--ink); background: #fff; border: 1px solid #8fa3a5; border-radius: 10px; padding: 10px 12px; min-height: 44px; }
 .csv-box select:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 1px; }
 .all-entries summary { cursor: pointer; color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; margin-bottom: 12px; }
+.ore-table small { color: var(--muted); }
+.chart { margin: 6px 0 0; padding: 18px 18px 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.chart svg { display: block; width: 100%; height: auto; }
+.chart .c-grid { stroke: var(--line); stroke-width: 1; }
+.chart .c-txt { fill: var(--muted); font: 12px var(--font); }
+.chart .c-plan { stroke: var(--muted); stroke-width: 2; stroke-dasharray: 6 5; }
+.chart .c-real { fill: none; stroke: var(--accent-text); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.chart .c-dot { fill: var(--accent-text); stroke: #fff; stroke-width: 2; }
+.chart figcaption { margin-top: 10px; }
+.key { display: inline-block; width: 22px; height: 0; border-top: 3px solid var(--accent-text); vertical-align: middle; margin: 0 6px 0 12px; }
+.key:first-child { margin-left: 0; }
+.key-plan { border-top: 2px dashed var(--muted); }

@@ -53,6 +53,21 @@
   const roleName = (id) => (ROLES.find(([r]) => r === id) || [, id])[1];
   const bar = (done, max, label) => `<progress max="${max || 1}" value="${Math.min(done, max || 1)}" aria-label="${esc(label)}"></progress>`;
 
+  /* Grafico: ore cumulate per sprint (si ferma allo sprint in corso) contro una retta dal via al totale previsto. SVG a mano, nessuna libreria. */
+  function drawChart(s, cum, t) {
+    const W = 720, H = 300, L = 52, R = 16, T = 16, B = 40, n = s.perSprint.length, max = s.prevista || 1;
+    const x = (i) => L + (W - L - R) * i / n, y = (v) => T + (H - T - B) * (1 - v / max);
+    const last = s.perSprint.reduce((k, sp, i) => (sp.dal <= t ? i : k), -1);   // ultimo sprint iniziato
+    const real = [[0, 0], ...cum.slice(0, last + 1).map((v, i) => [i + 1, v])];
+    const grid = [0, .25, .5, .75, 1].map((f) => `<line x1="${L}" x2="${W - R}" y1="${y(max * f)}" y2="${y(max * f)}" class="c-grid"/><text x="${L - 8}" y="${y(max * f) + 4}" text-anchor="end" class="c-txt">${num(Math.round(max * f))}</text>`).join("");
+    const xl = s.perSprint.map((sp, i) => `<text x="${x(i + 1)}" y="${H - B + 20}" text-anchor="middle" class="c-txt">${esc(sp.id)}</text>`).join("");
+    const pts = real.map(([i, v]) => `${x(i)},${y(v)}`).join(" ");
+    const dots = real.slice(1).map(([i, v]) => `<circle cx="${x(i)}" cy="${y(v)}" r="4" class="c-dot"/>`).join("");
+    $("ore-chart").innerHTML = `<title id="ore-chart-title">Ore cumulate per sprint: ${num(s.svolta)} su ${num(s.prevista)}</title>${grid}${xl}
+      <line x1="${x(0)}" y1="${y(0)}" x2="${x(n)}" y2="${y(max)}" class="c-plan"/>
+      <polyline points="${pts}" class="c-real"/>${dots}`;
+  }
+
   function draw(ore) {
     const s = summarize(ore), t = today();
     const current = (ore.sprint || []).find((x) => x.dal <= t && t <= x.al);
@@ -63,13 +78,16 @@
     ].map(([k, v, extra]) => `<div class="stat"><div class="stat-k">${k}</div><div class="stat-v">${v}</div>${extra}</div>`).join("");
 
     $("ore-persone").innerHTML = Object.entries(s.perPersona).sort((a, b) => nameOf(a[0]).localeCompare(nameOf(b[0]), "it")).map(([p, x]) =>
-      `<tr><th scope="row">${esc(nameOf(p))}</th><td class="n">${num(x.svolta)}</td><td class="n">${num(x.prevista)}</td><td class="n">${num(Math.max(x.prevista - x.svolta, 0))}</td><td class="bar-cell">${bar(x.svolta, x.prevista, `${nameOf(p)}: ${num(x.svolta)} ore su ${num(x.prevista)}`)}</td></tr>`).join("");
+      `<tr><th scope="row">${esc(nameOf(p))}</th><td class="n">${num(x.svolta)} <small>su ${num(x.prevista)}</small></td><td class="n">${num(Math.max(x.prevista - x.svolta, 0))}</td><td class="bar-cell">${bar(x.svolta, x.prevista, `${nameOf(p)}: ${num(x.svolta)} ore su ${num(x.prevista)}`)}</td></tr>`).join("");
 
     $("ore-ruoli").innerHTML = ROLES.map(([id, label]) => { const r = s.perRuolo[id];
       return `<tr><th scope="row">${label}</th><td class="n">${num(r.svolta)}</td><td class="n">${num(r.prevista)}</td><td class="n">${num(Math.max(r.prevista - r.svolta, 0))}</td><td class="n">${euro(r.svolta * r.tariffa)}</td><td class="bar-cell">${bar(r.svolta, r.prevista, `${label}: ${num(r.svolta)} ore su ${num(r.prevista)}`)}</td></tr>`; }).join("");
 
-    $("ore-sprint").innerHTML = s.perSprint.map((x) =>
-      `<tr${current && current.id === x.id ? ' aria-current="true"' : ""}><th scope="row">${esc(x.id)}</th><td>${day(x.dal)} – ${day(x.al)}</td><td class="n">${num(x.svolta)}</td><td class="n">${x.voci}</td></tr>`).join("");
+    let run = 0;
+    const cum = s.perSprint.map((x) => (run += x.svolta));
+    $("ore-sprint").innerHTML = s.perSprint.map((x, i) =>
+      `<tr${current && current.id === x.id ? ' aria-current="true"' : ""}><th scope="row">${esc(x.id)}</th><td>${day(x.dal)} – ${day(x.al)}</td><td class="n">${num(x.svolta)}</td><td class="n">${x.dal <= t ? num(cum[i]) : "–"}</td><td class="n">${x.voci}</td></tr>`).join("");
+    drawChart(s, cum, t);
 
     const voci = [...(ore.voci || [])].sort((a, b) => b.data.localeCompare(a.data) || a.persona.localeCompare(b.persona));
     $("ore-voci").innerHTML = voci.length ? voci.map((v) => { const u = issueUrl(v.issue);
