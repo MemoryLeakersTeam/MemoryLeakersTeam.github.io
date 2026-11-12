@@ -16,6 +16,7 @@ poi aprire <http://localhost:8000>. Lo script serve le pagine con gli stessi ind
 |---|---|
 | Documenti del repository [Documenti](https://github.com/MemoryLeakersTeam/Documenti) | **nulla**: si pubblicano da soli (vedi «Pubblicazione automatica dei documenti») |
 | Altri documenti, glossario, componenti, contatti | pannello admin (`/admin`) oppure a mano `data/site-data.js`; i PDF stanno in `pdf/<tappa>/<categoria>/` |
+| Ore produttive | pannello admin, scheda **Ore** (vedi «Ore produttive») |
 | Componenti del gruppo | `chi-siamo.html` |
 | Contatti | `contatti.html` |
 
@@ -31,6 +32,21 @@ Aprire `/admin` (link «Area riservata» nel footer). Serve un token personale d
 - Nella scheda **Documenti** un documento si può **mettere in evidenza**: resta nella sua categoria ma compare per primo lì dentro con l'etichetta «In evidenza», e la categoria sale in cima alla tappa (casella nel modulo, oppure pulsante «In evidenza» nell'elenco).
 - Ogni termine del glossario ha un link diretto, per esempio `…/glossario#capitolato`: l'identificativo nasce dal termine (o lo si fissa nel pannello) e il pulsante «Copia link» lo copia.
 - Tutti i dati stanno in `data/site-data.js`: il pannello lo riscrive, ma si può anche modificare a mano (formato JSON).
+
+## Ore produttive
+
+La pagina pubblica `/ore` mostra le ore svolte da ciascun componente, per ruolo e per sprint, contro il preventivo della Dichiarazione degli impegni (651 ore, 12.865 €), e permette di scaricare un CSV per sprint da usare nel Piano di Progetto. I dati stanno in `data/ore.json`, separato da `site-data.js` così non interferisce con la sincronizzazione dei documenti.
+
+**Regole d'uso** (da riportare anche nel Way of Working):
+
+- Si registrano solo le **ore produttive** svolte **dal 3 novembre 2026** (aggiudicazione). **Le riunioni non sono ore produttive.**
+- Ognuno registra le proprie ore **entro la fine dello sprint**, a passi di 0,5 h, col ruolo ricoperto in quel momento e, se esiste, l'issue su cui ha lavorato.
+- Gli sprint durano due settimane e partono il 3 novembre (elenco in `data/ore.json`, modificabile se il calendario cambia).
+- Le ore previste per persona e per ruolo vengono dalla Dichiarazione degli impegni: se cambiano, si aggiorna `preventivo` in `data/ore.json`.
+
+**Registrare le ore**: nel pannello admin, scheda **Ore**. Ogni registrazione o eliminazione è un commit su `data/ore.json` che si pubblica subito, senza «Salva e pubblica»; se due persone registrano insieme il pannello rilegge il file e riprova, quindi nessuna voce va persa. Il token dà accesso al repository e non limita le ore alla propria persona: la cronologia dei commit mostra chi ha scritto cosa.
+
+Formato di `data/ore.json`: `preventivo` (ore e tariffa per ruolo, ore per persona e ruolo, con il login GitHub come identificativo), `sprint` (`id`, `dal`, `al`) e `voci` (`id`, `persona`, `data` AAAA-MM-GG, `ruolo`, `ore`, `issue` nella forma `Repository#numero`, `nota`).
 
 ## Pubblicazione automatica dei documenti
 
@@ -60,7 +76,7 @@ Lo stesso controllo (senza `--external`) gira alla fine di ogni sincronizzazione
 
 ## Struttura
 
-- `index.html`, `glossario.html`, `chi-siamo.html`, `contatti.html`, `404.html`, `admin.html`: pagine (online hanno indirizzi puliti: `/`, `/glossario`, `/chi-siamo`, `/contatti`, `/admin`)
+- `index.html`, `glossario.html`, `ore.html`, `chi-siamo.html`, `contatti.html`, `404.html`, `admin.html`: pagine (online hanno indirizzi puliti: `/`, `/glossario`, `/ore`, `/chi-siamo`, `/contatti`, `/admin`)
 - `pdf/`: i PDF pubblicati
 - `css/`, `js/`: stile e script (`js/head.js` disegna la testa a rete neurale)
 - `fonts/`: Inter e Fraunces, ospitati da noi (licenza OFL, vedi i file `OFL-*.txt`)

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f1f5f2">
+  <title>Ore produttive · MemoryLeakers</title>
+  <meta name="description" content="Ore produttive rendicontate dal gruppo MemoryLeakers, confrontate con il preventivo.">
+  <link rel="canonical" href="https://memoryleakersteam.github.io/ore">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MemoryLeakers">
+  <meta property="og:title" content="Ore produttive · MemoryLeakers">
+  <meta property="og:description" content="Ore produttive rendicontate dal gruppo MemoryLeakers, confrontate con il preventivo.">
+  <meta property="og:url" content="https://memoryleakersteam.github.io/ore">
+  <meta property="og:image" content="https://memoryleakersteam.github.io/img/og-image.png">
+  <meta property="og:image:alt" content="Logo MemoryLeakers: un chip da cui colano cifre binarie">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preload" href="fonts/fraunces-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+  <a class="skip" href="#contenuto">Vai al contenuto</a>
+  <header class="nav" id="top">
+    <a class="brand" href="/"><img src="img/logo-mark.png" alt="" width="23" height="34"><span>Memory<b>Leakers</b></span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav aria-label="Principale" id="menu">
+      <ul>
+        <li><a href="/#candidatura">Candidatura</a></li>
+        <li><a href="/#rtb">RTB</a></li>
+        <li><a href="/#poc">PoC</a></li>
+        <li><a href="/#pb">PB</a></li>
+        <li><a href="/glossario">Glossario</a></li>
+        <li><a href="/ore" aria-current="page">Ore</a></li>
+        <li><a href="/chi-siamo">Chi siamo</a></li>
+        <li><a href="/contatti">Contatti</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page" id="contenuto" tabindex="-1">
+    <div class="eyebrow">Rendicontazione</div>
+    <h1 class="page-title">Ore produttive</h1>
+
+    <p id="ore-status" class="empty" role="status">Caricamento delle ore…</p>
+    <noscript><p class="empty">Questa pagina richiede JavaScript.</p></noscript>
+
+    <div id="ore-root" hidden>
+      <div class="stats" id="ore-summary"></div>
+      <p id="ore-warn" class="hint" role="status" hidden></p>
+
+      <h2 class="sub-title">Per componente</h2>
+      <div class="table-wrap"><table class="ore-table">
+        <thead><tr><th scope="col">Componente</th><th scope="col" class="n">Svolte</th><th scope="col" class="n">Previste</th><th scope="col" class="n">Residue</th><th scope="col"><span class="sr-only">Avanzamento</span></th></tr></thead>
+        <tbody id="ore-persone"></tbody>
+      </table></div>
+
+      <h2 class="sub-title">Per ruolo</h2>
+      <div class="table-wrap"><table class="ore-table">
+        <thead><tr><th scope="col">Ruolo</th><th scope="col" class="n">Svolte</th><th scope="col" class="n">Previste</th><th scope="col" class="n">Residue</th><th scope="col" class="n">Costo svolto</th><th scope="col"><span class="sr-only">Avanzamento</span></th></tr></thead>
+        <tbody id="ore-ruoli"></tbody>
+      </table></div>
+
+      <h2 class="sub-title">Andamento</h2>
+      <figure class="chart">
+        <svg id="ore-chart" viewBox="0 0 720 300" role="img" aria-labelledby="ore-chart-title"><title id="ore-chart-title">Ore cumulate per sprint</title></svg>
+        <figcaption class="hint"><span class="key key-real"></span> Ore svolte, cumulate <span class="key key-plan"></span> Andamento lineare verso il totale previsto (indicativo, non è il piano del Piano di Progetto). I valori sono nella tabella «Per sprint».</figcaption>
+      </figure>
+
+      <h2 class="sub-title">Per sprint</h2>
+      <div class="table-wrap"><table class="ore-table">
+        <thead><tr><th scope="col">Sprint</th><th scope="col">Periodo</th><th scope="col" class="n">Ore svolte</th><th scope="col" class="n">Cumulate</th><th scope="col" class="n">Registrazioni</th></tr></thead>
+        <tbody id="ore-sprint"></tbody>
+      </table></div>
+
+      <div class="csv-box">
+        <label for="csv-sprint">Esporta per il Piano di Progetto</label>
+        <select id="csv-sprint"></select>
+        <button type="button" class="btn" id="csv-btn">Scarica CSV</button>
+      </div>
+
+      <details class="all-entries">
+        <summary>Tutte le registrazioni <span id="ore-voci-count"></span></summary>
+        <div class="table-wrap"><table class="ore-table">
+          <thead><tr><th scope="col">Data</th><th scope="col">Componente</th><th scope="col">Ruolo</th><th scope="col" class="n">Ore</th><th scope="col">Issue</th><th scope="col">Nota</th></tr></thead>
+          <tbody id="ore-voci"></tbody>
+        </table></div>
+      </details>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 MemoryLeakers · <a href="https://github.com/MemoryLeakersTeam" target="_blank" rel="noopener">GitHub<span class="sr-only"> (si apre in una nuova scheda)</span></a> · <a href="/admin">Area riservata</a></p>
+  </footer>
+  <script src="data/site-data.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/ore.js"></script>
+</body>
+</html>
