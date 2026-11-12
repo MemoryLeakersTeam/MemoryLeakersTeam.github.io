@@ -78,7 +78,7 @@
     ].map(([k, v, extra]) => `<div class="stat"><div class="stat-k">${k}</div><div class="stat-v">${v}</div>${extra}</div>`).join("");
 
     $("ore-persone").innerHTML = Object.entries(s.perPersona).sort((a, b) => nameOf(a[0]).localeCompare(nameOf(b[0]), "it")).map(([p, x]) =>
-      `<tr><th scope="row">${esc(nameOf(p))}</th><td class="n">${num(x.svolta)} <small>su ${num(x.prevista)}</small></td><td class="n">${num(Math.max(x.prevista - x.svolta, 0))}</td><td class="bar-cell">${bar(x.svolta, x.prevista, `${nameOf(p)}: ${num(x.svolta)} ore su ${num(x.prevista)}`)}</td></tr>`).join("");
+      `<tr><th scope="row">${esc(nameOf(p))}</th><td class="n">${num(x.svolta)}</td><td class="n">${num(x.prevista)}</td><td class="n">${num(Math.max(x.prevista - x.svolta, 0))}</td><td class="bar-cell">${bar(x.svolta, x.prevista, `${nameOf(p)}: ${num(x.svolta)} ore su ${num(x.prevista)}`)}</td></tr>`).join("");
 
     $("ore-ruoli").innerHTML = ROLES.map(([id, label]) => { const r = s.perRuolo[id];
       return `<tr><th scope="row">${label}</th><td class="n">${num(r.svolta)}</td><td class="n">${num(r.prevista)}</td><td class="n">${num(Math.max(r.prevista - r.svolta, 0))}</td><td class="n">${euro(r.svolta * r.tariffa)}</td><td class="bar-cell">${bar(r.svolta, r.prevista, `${label}: ${num(r.svolta)} ore su ${num(r.prevista)}`)}</td></tr>`; }).join("");
