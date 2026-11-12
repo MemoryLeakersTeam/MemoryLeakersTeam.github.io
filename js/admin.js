@@ -31,7 +31,7 @@
       node.closest(".admin-bar").classList.toggle("has-err", kind === "err");
     }
   };
-  const fmtDate = (d) => (d ? new Date(d).toLocaleDateString("it-IT", { day: "2-digit", month: "short", year: "numeric" }) : "");
+  const fmtDate = (d) => (d ? (/^\d{4}-\d{2}-\d{2}/.test(d) ? String(d).slice(0, 10) : d) : ""); // AAAA-MM-GG
 
   async function api(path, opts = {}) {
     let r;
