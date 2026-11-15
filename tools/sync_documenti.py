@@ -5,6 +5,10 @@ La cartella è l'artifact «pdf» di Documenti: contiene i PDF e elenco.json (ge
 
 Regole:
 - si pubblicano solo i documenti «Approvato»; i verbali esterni solo se c'è il PDF firmato (*-signed.pdf);
+- un documento già pubblicato che torna in revisione (stato diverso da «Approvato», per esempio «Verificato»
+  dopo una modifica) resta pubblicato con nome, data, versione e PDF dell'ultima versione approvata, senza avvisi;
+  si sostituisce quando torna «Approvato» con una nuova versione e si rimuove solo se il suo sorgente
+  sparisce da Documenti. Se nel frattempo è stato spostato in un'altra cartella o tappa, la vecchia voce si rimuove;
 - una voce già pubblicata non si tocca finché non cambia la sua «versione»: ricompilare non basta;
 - i verbali firmati non vengono mai sostituiti né rimossi in automatico (solo un avviso);
 - un documento senza metadati o con dati non validi viene saltato con un avviso: non si pubblica
@@ -27,7 +31,8 @@ CATEGORIE = {
     "Diario_di_bordo": "Diapositive",
 }
 TITOLI = {"aggiunti": "Aggiunti", "aggiornati": "Aggiornati", "spostati": "Spostati", "adottati": "Adottati (invariati)",
-          "ricopiati": "PDF mancanti ricopiati", "rimossi": "Rimossi", "puliti": "PDF esclusi tolti dal sito", "avvisi": "Avvisi"}
+          "ricopiati": "PDF mancanti ricopiati", "rimossi": "Rimossi", "puliti": "PDF esclusi tolti dal sito",
+          "mantenuti": "Mantenuti all'ultima versione approvata", "avvisi": "Avvisi"}
 
 def leggi_dati(path):
     return json.loads(re.search(r"window\.SITE_DATA\s*=\s*(\{.*\})\s*;?\s*$", path.read_text(), re.S).group(1))
@@ -61,14 +66,16 @@ def problema(v, tappe, artifact):
 
 def documenti_da_pubblicare(elenco, tappe, artifact):
     """Dall'elenco di Documenti ai documenti da pubblicare.
-    Restituisce (documenti, sospesi, avvisi): «sospesi» sono le sorgenti il cui stato non si conosce
-    (niente metadati o dati non validi), le cui voci già pubblicate non vanno rimosse."""
-    docs, sospesi, avvisi = [], set(), []
+    Restituisce (documenti, sospesi, in_lavorazione, avvisi). Le voci già pubblicate di queste sorgenti non vanno rimosse:
+    - «sospesi»: sorgenti il cui stato non si conosce (niente metadati o dati non validi);
+    - «in_lavorazione»: sorgente → (stato, versione) dei documenti non «Approvato», per esempio in revisione."""
+    docs, sospesi, in_lavorazione, avvisi = [], set(), {}, []
     for v in elenco:
         sorgente = v.get("sorgente") or v["percorso"]
         if "stato" not in v:
             sospesi.add(sorgente); avvisi.append(f"{v['percorso']}: nessun metadato <documento>, saltato"); continue
-        if v["stato"] != "Approvato": continue
+        if v["stato"] != "Approvato":
+            in_lavorazione[sorgente] = (v["stato"], v.get("versione") or "?"); continue
         firmato = bool(v.get("firmato"))
         if v["cartella"] == "Verbali_esterni" and not firmato: continue   # i verbali esterni si pubblicano solo firmati
         p = problema(v, tappe, artifact)
@@ -77,7 +84,7 @@ def documenti_da_pubblicare(elenco, tappe, artifact):
         docs.append({"pdf": pdf, "url": url, "tappa": v["tappa"].lower(), "firmato": firmato,
                      "voce": {"cat": CATEGORIE[v["cartella"]], "name": nome_sito(v), "date": v["data"],
                               "sorgente": sorgente, "versione": v.get("versione") or ""}})
-    return docs, sospesi, avvisi
+    return docs, sospesi, in_lavorazione, avvisi
 
 def sincronizza(artifact, sito, dry_run=False):
     """Allinea data/site-data.js e pdf/ all'artifact. Restituisce il rapporto delle modifiche."""
@@ -86,7 +93,7 @@ def sincronizza(artifact, sito, dry_run=False):
     data = leggi_dati(dati_path)
     tappe = {b["id"]: b for b in data["baselines"] if b.get("id")}
     elenco = json.loads((artifact / "elenco.json").read_text())
-    docs, sospesi, avvisi = documenti_da_pubblicare(elenco, tappe, artifact)
+    docs, sospesi, in_lavorazione, avvisi = documenti_da_pubblicare(elenco, tappe, artifact)
 
     r = {k: [] for k in TITOLI}; r["avvisi"] = avvisi
     copie, cancellazioni, modificato = [], [], False
@@ -94,8 +101,10 @@ def sincronizza(artifact, sito, dry_run=False):
     voci = [(b, it) for b in data["baselines"] for it in b["items"]]
     per_url = {it["url"]: it for _, it in voci}
     pubblicati = {d["url"] for d in docs}
-    # voci automatiche che non corrispondono più a nessun documento: rimosse, oppure spostate
-    orfane = [(b, it) for b, it in voci if "sorgente" in it and it["url"] not in pubblicati and it["sorgente"] not in sospesi]
+    # voci automatiche che non corrispondono più a nessun documento: rimosse, oppure spostate.
+    # Non lo sono quelle di un documento sospeso o in revisione: restano come sono
+    orfane = [(b, it) for b, it in voci if "sorgente" in it and it["url"] not in pubblicati
+              and it["sorgente"] not in sospesi and it["sorgente"] not in in_lavorazione]
 
     # esclusi: si dimenticano quelli che Documenti non ha più, e i loro PDF (non visibili sul sito) si tolgono
     if "esclusi" in data:
@@ -151,6 +160,10 @@ def sincronizza(artifact, sito, dry_run=False):
     for s in sospesi:
         if any(it.get("sorgente") == s for _, it in voci):
             r["avvisi"].append(f"{s}: già pubblicato, lo lascio com'è finché il problema non è risolto")
+    for _, it in voci:
+        if it.get("sorgente") in in_lavorazione:
+            stato, versione = in_lavorazione[it["sorgente"]]
+            r["mantenuti"].append(f"{it['name']}: versione {it.get('versione') or '?'} (in Documenti: {versione}, {stato})")
 
     if not dry_run:
         for f in cancellazioni:
