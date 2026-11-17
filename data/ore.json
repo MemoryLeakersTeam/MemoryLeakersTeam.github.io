@@ -1,0 +1,143 @@
+{
+  "fonte": "Dichiarazione degli impegni (repo Documenti, Candidatura/Generali). Le ore si contano dal 3 novembre 2026 (aggiudicazione); le riunioni non sono ore produttive.",
+  "inizio": "2026-11-03",
+  "preventivo": {
+    "ruoli": {
+      "responsabile": {
+        "ore": 60,
+        "tariffa": 30
+      },
+      "amministratore": {
+        "ore": 56,
+        "tariffa": 20
+      },
+      "analista": {
+        "ore": 80,
+        "tariffa": 25
+      },
+      "progettista": {
+        "ore": 112,
+        "tariffa": 25
+      },
+      "programmatore": {
+        "ore": 182,
+        "tariffa": 15
+      },
+      "verificatore": {
+        "ore": 161,
+        "tariffa": 15
+      }
+    },
+    "persone": {
+      "ttteo": {
+        "responsabile": 9,
+        "amministratore": 8,
+        "analista": 11,
+        "progettista": 16,
+        "programmatore": 26,
+        "verificatore": 23
+      },
+      "jeidi19": {
+        "responsabile": 8,
+        "amministratore": 8,
+        "analista": 12,
+        "progettista": 16,
+        "programmatore": 26,
+        "verificatore": 23
+      },
+      "JJ-jacopo24": {
+        "responsabile": 8,
+        "amministratore": 8,
+        "analista": 12,
+        "progettista": 16,
+        "programmatore": 26,
+        "verificatore": 23
+      },
+      "Matteomarcon": {
+        "responsabile": 9,
+        "amministratore": 8,
+        "analista": 11,
+        "progettista": 16,
+        "programmatore": 26,
+        "verificatore": 23
+      },
+      "Ric02P": {
+        "responsabile": 8,
+        "amministratore": 8,
+        "analista": 12,
+        "progettista": 16,
+        "programmatore": 26,
+        "verificatore": 23
+      },
+      "paolopreve": {
+        "responsabile": 9,
+        "amministratore": 8,
+        "analista": 11,
+        "progettista": 16,
+        "programmatore": 26,
+        "verificatore": 23
+      },
+      "Kyara-Prot": {
+        "responsabile": 9,
+        "amministratore": 8,
+        "analista": 11,
+        "progettista": 16,
+        "programmatore": 26,
+        "verificatore": 23
+      }
+    }
+  },
+  "sprint": [
+    {
+      "id": "S1",
+      "dal": "2026-11-03",
+      "al": "2026-11-16"
+    },
+    {
+      "id": "S2",
+      "dal": "2026-11-17",
+      "al": "2026-11-30"
+    },
+    {
+      "id": "S3",
+      "dal": "2026-12-01",
+      "al": "2026-12-14"
+    },
+    {
+      "id": "S4",
+      "dal": "2026-12-15",
+      "al": "2026-12-28"
+    },
+    {
+      "id": "S5",
+      "dal": "2026-12-29",
+      "al": "2027-01-11"
+    },
+    {
+      "id": "S6",
+      "dal": "2027-01-12",
+      "al": "2027-01-25"
+    },
+    {
+      "id": "S7",
+      "dal": "2027-01-26",
+      "al": "2027-02-08"
+    },
+    {
+      "id": "S8",
+      "dal": "2027-02-09",
+      "al": "2027-02-22"
+    },
+    {
+      "id": "S9",
+      "dal": "2027-02-23",
+      "al": "2027-03-08"
+    },
+    {
+      "id": "S10",
+      "dal": "2027-03-09",
+      "al": "2027-03-22"
+    }
+  ],
+  "voci": []
+}

@@ -14,6 +14,7 @@
   };
   const STORE = "ml-admin";
   let cfg = null, data = null, original = "", sha = null;
+  let me = "", ore = null; // login GitHub di chi è collegato, dati di data/ore.json
   let repoPdfs = []; // PDF presenti nella cartella pdf/ del repository
   let docEdit = null;
 
@@ -92,10 +93,10 @@
     cfg = c;
     try {
       let who = c.repo;
-      try { who = (await api("/user")).login + " · " + c.repo; } catch (e) { if (e.status === 401) throw e; }
+      try { me = (await api("/user")).login; who = me + " · " + c.repo; } catch (e) { if (e.status === 401) throw e; }
       const repo = await api("/repos/" + c.repo);
       if (!repo.permissions || !repo.permissions.push) throw Object.assign(new Error("Questo token non ha permesso di scrittura sul repository."), { status: -1 });
-      await loadData(); await loadPdfList();
+      await loadData(); await loadPdfList(); await loadOre();
       remember ? sessionStorage.setItem(STORE, JSON.stringify(c)) : sessionStorage.removeItem(STORE);
       $("who").textContent = `Collegato come ${who} (ramo ${c.branch})`;
       $("login").hidden = true; $("panel").hidden = false; $("f-token").value = "";
@@ -345,8 +346,65 @@
     row: (x) => ({ main: x.label, meta: `${x.value} → ${x.url}` }),
   });
 
+  /* ---------- ore produttive (si salvano subito, ognuna con un commit su data/ore.json) ---------- */
+  const OREPATH = "data/ore.json", O = window.MLOre;
+  const oreUrl = () => `/repos/${cfg.repo}/contents/${OREPATH}`;
+  async function oreRead() { const f = await api(`${oreUrl()}?ref=${encodeURIComponent(cfg.branch)}`); return { sha: f.sha, doc: JSON.parse(b64ToText(f.content)) }; }
+  async function loadOre() { try { ore = (await oreRead()).doc; } catch { ore = null; } }
+  // rilegge il file a ogni salvataggio e riprova se nel frattempo qualcun altro ha registrato ore: le voci non si perdono
+  async function oreMutate(fn, message) {
+    for (let i = 0; i < 3; i++) {
+      const { sha: s, doc } = await oreRead(); fn(doc);
+      try {
+        await api(oreUrl(), { method: "PUT", body: JSON.stringify({ message, content: textToB64(JSON.stringify(doc, null, 2) + "\n"), branch: cfg.branch, sha: s }) });
+        ore = doc; return;
+      } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+    }
+    throw Object.assign(new Error("Troppe registrazioni contemporanee: riprova tra qualche secondo."), { status: -1 });
+  }
+  const oreName = (login) => (data.members.find((m) => (m.github || "").toLowerCase() === login.toLowerCase()) || {}).name || login;
+  function renderOre() {
+    const sel = $("o-persona"), keep = sel.value, people = data.members.filter((m) => m.github);
+    sel.replaceChildren(...people.map((m) => el("option", { value: m.github }, m.name)));
+    sel.value = keep || (people.find((m) => m.github.toLowerCase() === me.toLowerCase()) || people[0] || {}).github || "";
+    if (!$("o-ruolo").options.length) $("o-ruolo").replaceChildren(...O.ROLES.map(([id, l]) => el("option", { value: id }, l)));
+    $("o-data").min = (ore && ore.inizio) || "2026-11-03"; $("o-data").max = O.today(); if (!$("o-data").value) $("o-data").value = O.today();
+    const box = $("o-list"); box.replaceChildren();
+    if (!ore) { box.append(emptyNote("Impossibile leggere data/ore.json dal repository: il file esiste sul ramo scelto?")); $("o-submit").disabled = true; return; }
+    $("o-submit").disabled = false;
+    const mine = (ore.voci || []).filter((v) => v.persona === sel.value).sort((a, b) => b.data.localeCompare(a.data));
+    const tot = mine.reduce((s, v) => s + v.ore, 0);
+    $("o-list-title").textContent = `Registrazioni di ${oreName(sel.value)} · ${O.num(tot)} h`;
+    box.append(mine.length ? el("div", { class: "list" }, mine.map((v) => row(el("b", {}, `${O.num(v.ore)} h · ${(O.ROLES.find(([r]) => r === v.ruolo) || [, v.ruolo])[1]}`),
+      [fmtDate(v.data), v.issue && " · " + v.issue, v.nota && " · " + v.nota].filter(Boolean).join(""),
+      [btn("Elimina", `Elimina la registrazione del ${v.data}`, async () => {
+        if (!confirm(`Eliminare la registrazione di ${O.num(v.ore)} h del ${fmtDate(v.data)}? L'eliminazione è un commit e resta nella cronologia.`)) return;
+        try { await oreMutate((d) => { d.voci = d.voci.filter((x) => x.id !== v.id); }, `Admin: elimina ore ${v.persona} ${v.data}`); setMsg($("o-msg"), "Registrazione eliminata.", "ok"); } catch (e) { setMsg($("o-msg"), explain(e), "err"); }
+        renderOre();
+      }, "danger")]))) : emptyNote("Nessuna registrazione."));
+  }
+  $("o-persona").addEventListener("change", renderOre);
+  $("o-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const msg = $("o-msg"), persona = $("o-persona").value, data_ = $("o-data").value, h = Number($("o-ore").value);
+    const repo = $("o-repo").value, n = $("o-issue").value.trim(), issue = repo && n ? `${repo}#${n}` : "";
+    if ((repo && !n) || (!repo && n)) return setMsg(msg, "Per collegare un'issue scegli il repository e scrivi il numero.", "err");
+    if (!(h >= 0.5 && h <= 12 && Math.round(h * 2) === h * 2)) return setMsg(msg, "Le ore vanno da 0,5 a 12, a passi di 0,5.", "err");
+    if (data_ < ((ore && ore.inizio) || "2026-11-03")) return setMsg(msg, "Le ore si contano dal 3 novembre 2026.", "err");
+    if (data_ > O.today()) return setMsg(msg, "La data non può essere nel futuro.", "err");
+    if (issue && !O.ISSUE_RE.test(issue)) return setMsg(msg, "Issue non valida.", "err");
+    const v = { id: `${data_}-${persona}-${Date.now().toString(36)}`, persona, data: data_, ruolo: $("o-ruolo").value, ore: h, issue, nota: $("o-nota").value.trim() };
+    $("o-submit").disabled = true; setMsg(msg, "Registro le ore…");
+    try {
+      await oreMutate((d) => { (d.voci ||= []).push(v); }, `Admin: registra ore ${persona} ${data_}`);
+      $("o-ore").value = ""; $("o-issue").value = ""; $("o-repo").value = ""; $("o-nota").value = "";
+      setMsg(msg, "Ore registrate. La pagina Ore si aggiorna in uno o due minuti.", "ok");
+    } catch (err) { setMsg(msg, explain(err), "err"); }
+    renderOre();
+  });
+
   function resetForms() { resetDocForm(); glo.reset(); mem.reset(); con.reset(); }
-  function renderAll() { renderVisibility(); fillRepoSelect($("d-repofile").value); renderDocs(); glo.render(); mem.render(); con.render(); }
+  function renderAll() { renderVisibility(); fillRepoSelect($("d-repofile").value); renderDocs(); glo.render(); mem.render(); con.render(); renderOre(); }
 
   /* ---------- riaccesso nella stessa scheda ---------- */
   try { const s = JSON.parse(sessionStorage.getItem(STORE) || "null"); if (s) { $("f-repo").value = s.repo; $("f-branch").value = s.branch; login(s, true); } } catch { /* ignora */ }
