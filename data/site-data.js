@@ -734,6 +734,63 @@ window.SITE_DATA = {
       "term": "YouTrack",
       "lang": "en",
       "def": "Strumento di JetBrains per il tracciamento delle issue e la gestione dei progetti secondo metodologie agili."
+    },
+    {
+      "term": "Processo",
+      "def": "Insieme di attività correlate che, a partire da un input, producono un output con un obiettivo definito. Nello standard ISO/IEC 12207 i processi si dividono in primari, di supporto e organizzativi."
+    },
+    {
+      "term": "Procedura",
+      "def": "Sequenza ordinata di passi per svolgere un’attività di un processo: indica chi la esegue, con quali input, quali output e quali strumenti."
+    },
+    {
+      "term": "Discord",
+      "lang": "en",
+      "def": "Piattaforma di comunicazione vocale, video e testuale, usata dal gruppo per le riunioni interne."
+    },
+    {
+      "term": "ISO/IEC 12207",
+      "lang": "en",
+      "def": "Standard internazionale che definisce i processi del ciclo di vita del software. Le Norme di Progetto seguono la versione del 1995."
+    },
+    {
+      "term": "Milestone",
+      "lang": "en",
+      "def": "Punto di controllo nel calendario del progetto, legato a una data e ai risultati da raggiungere entro quella data. Su GitHub raggruppa le issue che vi contribuiscono."
+    },
+    {
+      "term": "Responsabile",
+      "def": "Ruolo che coordina il gruppo e lo rappresenta verso l’esterno: pianifica le attività, gestisce le risorse e approva il rilascio dei documenti. Non redige documenti."
+    },
+    {
+      "term": "Amministratore",
+      "def": "Ruolo che gestisce gli strumenti e l’infrastruttura di lavoro del gruppo (repository, automazioni, sito) e ne descrive l’uso nelle Norme di Progetto."
+    },
+    {
+      "term": "Analista",
+      "def": "Ruolo che studia il problema e il dominio applicativo e ne ricava i requisiti del prodotto, documentati nell’Analisi dei Requisiti."
+    },
+    {
+      "term": "Progettista",
+      "def": "Ruolo che definisce l’architettura del prodotto a partire dai requisiti, scegliendo tecnologie e soluzioni."
+    },
+    {
+      "term": "Programmatore",
+      "def": "Ruolo che realizza il prodotto secondo la progettazione, scrivendo il codice e i relativi test."
+    },
+    {
+      "term": "Diario di bordo",
+      "def": "Breve presentazione periodica del gruppo al docente sull’avanzamento del progetto, sulle difficoltà incontrate e sui prossimi passi."
+    },
+    {
+      "term": "GitHub Actions",
+      "lang": "en",
+      "def": "Servizio di GitHub che esegue in automatico dei flussi di lavoro (workflow) quando nel repository avviene un evento, per esempio una pull request o un push."
+    },
+    {
+      "term": "Google Calendar",
+      "lang": "en",
+      "def": "Servizio di calendario di Google, usato dal gruppo per condividere le disponibilità dei membri."
     }
   ],
   "members": [
@@ -789,5 +846,6 @@ window.SITE_DATA = {
       "value": "MemoryLeakersTeam/Documenti",
       "url": "https://github.com/MemoryLeakersTeam/Documenti"
     }
-  ]
+  ],
+  "esclusi": []
 };
