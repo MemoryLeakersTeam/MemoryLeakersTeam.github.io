@@ -139,5 +139,15 @@
       "al": "2027-03-22"
     }
   ],
-  "voci": []
+  "voci": [
+    {
+      "id": "2026-11-16-jeidi19-mwks5mb7",
+      "persona": "jeidi19",
+      "data": "2026-11-16",
+      "ruolo": "amministratore",
+      "ore": 5,
+      "issue": "",
+      "nota": ""
+    }
+  ]
 }
