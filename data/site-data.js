@@ -30,6 +30,14 @@ window.SITE_DATA = {
           "url": "pdf/rtb/verbali_interni/2026-11-03.pdf",
           "sorgente": "RTB/Verbali_interni/2026-11-03.typ",
           "versione": "1.0.0"
+        },
+        {
+          "cat": "Diapositive",
+          "name": "Diario di bordo 16/11/2026",
+          "date": "2026-11-16",
+          "url": "pdf/rtb/diario_di_bordo/2026-11-16.pdf",
+          "sorgente": "RTB/Diario_di_bordo/2026-11-16.pdf",
+          "versione": "ae5de7fe"
         }
       ],
       "visible": true
