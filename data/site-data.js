@@ -29,7 +29,7 @@ window.SITE_DATA = {
           "date": "2026-11-03",
           "url": "pdf/rtb/verbali_interni/2026-11-03.pdf",
           "sorgente": "RTB/Verbali_interni/2026-11-03.typ",
-          "versione": "1.0.0"
+          "versione": "2.0.0"
         },
         {
           "cat": "Diapositive",
