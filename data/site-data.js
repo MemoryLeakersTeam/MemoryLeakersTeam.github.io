@@ -46,6 +46,14 @@ window.SITE_DATA = {
           "url": "pdf/rtb/verbali_interni/2026-11-10.pdf",
           "sorgente": "RTB/Verbali_interni/2026-11-10.typ",
           "versione": "1.0.0"
+        },
+        {
+          "cat": "Verbali esterni",
+          "name": "Verbale esterno 13/11/2026 Var Group firmato",
+          "date": "2026-11-13",
+          "url": "pdf/rtb/verbali_esterni/2026-11-13-vargroup-signed.pdf",
+          "sorgente": "RTB/Verbali_esterni/2026-11-13-vargroup.typ",
+          "versione": "1.0.0"
         }
       ],
       "visible": true
