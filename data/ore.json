@@ -193,6 +193,15 @@
       "ore": 0.5,
       "issue": "Documenti#67",
       "nota": "verifica delle Norme di Progetto (#69)"
+    },
+    {
+      "id": "2026-11-16-JJ-jacopo24-mwsb1cgn",
+      "persona": "JJ-jacopo24",
+      "data": "2026-11-16",
+      "ruolo": "verificatore",
+      "ore": 0.5,
+      "issue": "Documenti#66",
+      "nota": "verifica del rilascio (#74)"
     }
   ]
 }
