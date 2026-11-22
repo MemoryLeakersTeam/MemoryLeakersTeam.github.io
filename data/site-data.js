@@ -842,6 +842,41 @@ window.SITE_DATA = {
       "id": "reasoning",
       "lang": "en",
       "def": "Processo di ragionamento intermedio svolto da un modello linguistico per scomporre un problema ed elaborare passaggi logici prima di formulare la risposta finale"
+    },
+    {
+      "term": "Analisi dei Requisiti",
+      "def": "Documento tecnico che elenca e classifica i requisiti del prodotto, concordati con il proponente."
+    },
+    {
+      "term": "Consuntivo",
+      "def": "Ore e costi realmente sostenuti in uno sprint o nell'intero progetto, confrontati con il preventivo."
+    },
+    {
+      "term": "Design thinking",
+      "lang": "en",
+      "def": "Sessione di lavoro con il proponente in cui si definiscono insieme flussi, requisiti e priorità del prodotto."
+    },
+    {
+      "term": "Norme di Progetto",
+      "def": "Documento interno con le regole, i processi e gli strumenti che il gruppo adotta per lavorare."
+    },
+    {
+      "term": "Pipeline",
+      "lang": "en",
+      "def": "Sequenza di passi automatici in cui l'uscita di ciascun passo è l'ingresso del successivo."
+    },
+    {
+      "term": "Piano di Progetto",
+      "def": "Documento con la pianificazione delle attività, l'analisi dei rischi, il preventivo e il consuntivo, aggiornato a ogni sprint."
+    },
+    {
+      "term": "Preventivo",
+      "def": "Ore e costi previsti per un periodo di lavoro o per l'intero progetto."
+    },
+    {
+      "term": "Template",
+      "lang": "en",
+      "def": "Modello con una struttura già pronta, usato per creare documenti, issue o pull request."
     }
   ],
   "members": [
