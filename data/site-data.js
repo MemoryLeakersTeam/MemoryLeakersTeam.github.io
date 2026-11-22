@@ -815,6 +815,33 @@ window.SITE_DATA = {
       "term": "Google Calendar",
       "lang": "en",
       "def": "Servizio di calendario di Google, usato dal gruppo per condividere le disponibilità dei membri."
+    },
+    {
+      "term": "Microsoft Teams",
+      "id": "microsoft-teams",
+      "def": "Piattaforma di comunicazione e collaborazione aziendale che integra chat di gruppo, videoconferenze, chiamate e condivisione di file in uno spazio di lavoro condiviso"
+    },
+    {
+      "term": "Prompt caching",
+      "id": "prompt-caching",
+      "lang": "en",
+      "def": "Sistema di caching basato sulla corrispondenza esatta di porzioni di prompt già elaborate, che consente di riutilizzarle senza ripetere il calcolo."
+    },
+    {
+      "term": "Classificatore",
+      "id": "classificatore",
+      "def": "Modello o componente software che analizza un input e lo assegna automaticamente a una o più categorie predefinite in base a regole o pattern appresi"
+    },
+    {
+      "term": "Conversazioni multi-turno",
+      "id": "conversazioni-multi-turno",
+      "def": "Interazioni composte da una sequenza di più scambi consecutivi tra utente e sistema, in cui ogni nuovo messaggio può fare riferimento al contesto dei turni precedenti."
+    },
+    {
+      "term": "Reasoning",
+      "id": "reasoning",
+      "lang": "en",
+      "def": "Processo di ragionamento intermedio svolto da un modello linguistico per scomporre un problema ed elaborare passaggi logici prima di formulare la risposta finale"
     }
   ],
   "members": [
