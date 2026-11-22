@@ -40,15 +40,12 @@ def leggi_dati(path):
 def scrivi_dati(path, data):   # stesso formato di serialize() in js/admin.js
     path.write_text(HEADER + "window.SITE_DATA = " + json.dumps(data, indent=2, ensure_ascii=False) + ";\n")
 
-def gg_mm_aaaa(data):
-    a, m, g = data.split("-"); return f"{g}/{m}/{a}"
-
 def nome_sito(v):
     """Nome della voce secondo la convenzione del sito."""
     c = v["cartella"]
-    if c == "Verbali_interni": return f"Verbale interno {gg_mm_aaaa(v['data'])}"
-    if c == "Verbali_esterni": return f"Verbale esterno {gg_mm_aaaa(v['data'])} {v['azienda']} firmato"
-    if c == "Diario_di_bordo": return f"Diario di bordo {gg_mm_aaaa(v['data'])}"
+    if c == "Verbali_interni": return f"Verbale interno {v['data']}"
+    if c == "Verbali_esterni": return f"Verbale esterno {v['data']} {v['azienda']} firmato"
+    if c == "Diario_di_bordo": return f"Diario di bordo {v['data']}"
     return v.get("titolo") or v["nome"]
 
 def pdf_e_url(v):
