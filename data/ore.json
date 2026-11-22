@@ -211,15 +211,6 @@
       "ore": 0.5,
       "issue": "MemoryLeakersTeam.github.io#4",
       "nota": "verifica del cruscotto ore (#6)"
-    },
-    {
-      "id": "2026-11-17-JJ-jacopo24-mwsb5zwe",
-      "persona": "JJ-jacopo24",
-      "data": "2026-11-17",
-      "ruolo": "verificatore",
-      "ore": 0.5,
-      "issue": "Documenti#62",
-      "nota": "verifica delle milestone"
     }
   ]
 }
