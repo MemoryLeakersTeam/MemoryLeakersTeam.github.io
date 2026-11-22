@@ -166,6 +166,15 @@
       "ore": 2,
       "issue": "",
       "nota": ""
+    },
+    {
+      "id": "2026-11-14-JJ-jacopo24-mwsatffa",
+      "persona": "JJ-jacopo24",
+      "data": "2026-11-14",
+      "ruolo": "verificatore",
+      "ore": 0.5,
+      "issue": "Documenti#65",
+      "nota": "verifica dell'automazione del registro (#70)"
     }
   ]
 }
