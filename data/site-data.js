@@ -17,7 +17,7 @@ window.SITE_DATA = {
       "items": [
         {
           "cat": "Diapositive",
-          "name": "Diario di bordo 09/11/2026",
+          "name": "Diario di bordo 2026-11-09",
           "date": "2026-11-09",
           "url": "pdf/rtb/diario_di_bordo/2026-11-09.pdf",
           "sorgente": "RTB/Diario_di_bordo/2026-11-09.pdf",
@@ -25,7 +25,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali interni",
-          "name": "Verbale interno 03/11/2026",
+          "name": "Verbale interno 2026-11-03",
           "date": "2026-11-03",
           "url": "pdf/rtb/verbali_interni/2026-11-03.pdf",
           "sorgente": "RTB/Verbali_interni/2026-11-03.typ",
@@ -33,7 +33,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Diapositive",
-          "name": "Diario di bordo 16/11/2026",
+          "name": "Diario di bordo 2026-11-16",
           "date": "2026-11-16",
           "url": "pdf/rtb/diario_di_bordo/2026-11-16.pdf",
           "sorgente": "RTB/Diario_di_bordo/2026-11-16.pdf",
@@ -41,7 +41,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali interni",
-          "name": "Verbale interno 10/11/2026",
+          "name": "Verbale interno 2026-11-10",
           "date": "2026-11-10",
           "url": "pdf/rtb/verbali_interni/2026-11-10.pdf",
           "sorgente": "RTB/Verbali_interni/2026-11-10.typ",
@@ -49,7 +49,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali esterni",
-          "name": "Verbale esterno 13/11/2026 Var Group firmato",
+          "name": "Verbale esterno 2026-11-13 Var Group firmato",
           "date": "2026-11-13",
           "url": "pdf/rtb/verbali_esterni/2026-11-13-vargroup-signed.pdf",
           "sorgente": "RTB/Verbali_esterni/2026-11-13-vargroup.typ",
@@ -81,7 +81,7 @@ window.SITE_DATA = {
       "items": [
         {
           "cat": "Verbali interni",
-          "name": "Verbale interno 13/10/2026",
+          "name": "Verbale interno 2026-10-13",
           "date": "2026-10-13",
           "url": "pdf/candidatura/verbali_interni/2026-10-13.pdf",
           "sorgente": "Candidatura/Verbali_interni/2026-10-13.typ",
@@ -89,7 +89,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali interni",
-          "name": "Verbale interno 19/10/2026",
+          "name": "Verbale interno 2026-10-19",
           "date": "2026-10-19",
           "url": "pdf/candidatura/verbali_interni/2026-10-19.pdf",
           "sorgente": "Candidatura/Verbali_interni/2026-10-19.typ",
@@ -97,7 +97,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali interni",
-          "name": "Verbale interno 20/10/2026",
+          "name": "Verbale interno 2026-10-20",
           "date": "2026-10-20",
           "url": "pdf/candidatura/verbali_interni/2026-10-20.pdf",
           "sorgente": "Candidatura/Verbali_interni/2026-10-20.typ",
@@ -105,7 +105,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali interni",
-          "name": "Verbale interno 23/10/2026",
+          "name": "Verbale interno 2026-10-23",
           "date": "2026-10-23",
           "url": "pdf/candidatura/verbali_interni/2026-10-23.pdf",
           "sorgente": "Candidatura/Verbali_interni/2026-10-23.typ",
@@ -113,7 +113,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali interni",
-          "name": "Verbale interno 26/10/2026",
+          "name": "Verbale interno 2026-10-26",
           "date": "2026-10-26",
           "url": "pdf/candidatura/verbali_interni/2026-10-26.pdf",
           "sorgente": "Candidatura/Verbali_interni/2026-10-26.typ",
@@ -121,7 +121,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali interni",
-          "name": "Verbale interno 27/10/2026",
+          "name": "Verbale interno 2026-10-27",
           "date": "2026-10-27",
           "url": "pdf/candidatura/verbali_interni/2026-10-27.pdf",
           "sorgente": "Candidatura/Verbali_interni/2026-10-27.typ",
@@ -129,7 +129,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali esterni",
-          "name": "Verbale esterno 22/10/2026 Vimar firmato",
+          "name": "Verbale esterno 2026-10-22 Vimar firmato",
           "date": "2026-10-22",
           "url": "pdf/candidatura/verbali_esterni/2026-10-22-vimar-signed.pdf",
           "sorgente": "Candidatura/Verbali_esterni/2026-10-22-vimar.typ",
@@ -137,7 +137,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali esterni",
-          "name": "Verbale esterno 22/10/2026 Ergon firmato",
+          "name": "Verbale esterno 2026-10-22 Ergon firmato",
           "date": "2026-10-22",
           "url": "pdf/candidatura/verbali_esterni/2026-10-22-ergon-signed.pdf",
           "sorgente": "Candidatura/Verbali_esterni/2026-10-22-ergon.typ",
@@ -145,7 +145,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali esterni",
-          "name": "Verbale esterno 26/10/2026 Miriade firmato",
+          "name": "Verbale esterno 2026-10-26 Miriade firmato",
           "date": "2026-10-26",
           "url": "pdf/candidatura/verbali_esterni/2026-10-26-miriade-signed.pdf",
           "sorgente": "Candidatura/Verbali_esterni/2026-10-26-miriade.typ",
@@ -153,7 +153,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali interni",
-          "name": "Verbale interno 28/10/2026",
+          "name": "Verbale interno 2026-10-28",
           "date": "2026-10-28",
           "url": "pdf/candidatura/verbali_interni/2026-10-28.pdf",
           "sorgente": "Candidatura/Verbali_interni/2026-10-28.typ",
@@ -194,7 +194,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali esterni",
-          "name": "Verbale esterno 26/10/2026 Var Group firmato",
+          "name": "Verbale esterno 2026-10-26 Var Group firmato",
           "date": "2026-10-26",
           "url": "pdf/candidatura/verbali_esterni/2026-10-26-vargroup-signed.pdf",
           "sorgente": "Candidatura/Verbali_esterni/2026-10-26-vargroup.typ",
@@ -202,7 +202,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Diapositive",
-          "name": "Diario di bordo 26/10/2026",
+          "name": "Diario di bordo 2026-10-26",
           "date": "2026-10-26",
           "url": "pdf/candidatura/diario_di_bordo/2026-10-26.pdf",
           "sorgente": "Candidatura/Diario_di_bordo/2026-10-26.pdf",
@@ -210,7 +210,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Diapositive",
-          "name": "Diario di bordo 02/11/2026",
+          "name": "Diario di bordo 2026-11-02",
           "date": "2026-11-02",
           "url": "pdf/candidatura/diario_di_bordo/2026-11-02.pdf",
           "sorgente": "Candidatura/Diario_di_bordo/2026-11-02.pdf",
