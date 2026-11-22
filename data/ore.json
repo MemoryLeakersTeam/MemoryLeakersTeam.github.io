@@ -175,6 +175,15 @@
       "ore": 0.5,
       "issue": "Documenti#65",
       "nota": "verifica dell'automazione del registro (#70)"
+    },
+    {
+      "id": "2026-11-14-JJ-jacopo24-mwsaxdof",
+      "persona": "JJ-jacopo24",
+      "data": "2026-11-14",
+      "ruolo": "verificatore",
+      "ore": 0.5,
+      "issue": "MemoryLeakersTeam.github.io#7",
+      "nota": "verifica della PR #8 (versione approvata sul sito)"
     }
   ]
 }
