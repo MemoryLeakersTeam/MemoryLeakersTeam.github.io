@@ -254,6 +254,8 @@ progress { width: 100%; height: 10px; accent-color: var(--accent-text); }
 .csv-box select:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 1px; }
 .all-entries summary { cursor: pointer; color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; margin-bottom: 12px; }
 .ore-table small { color: var(--muted); }
+.ore-matrix tfoot > tr > * { border-top: 1px solid var(--line); border-bottom: 0; font-weight: 600; }
+.ore-matrix thead th { white-space: nowrap; }
 .chart { margin: 6px 0 0; padding: 18px 18px 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
 .chart svg { display: block; width: 100%; height: auto; }
 .chart .c-grid { stroke: var(--line); stroke-width: 1; }

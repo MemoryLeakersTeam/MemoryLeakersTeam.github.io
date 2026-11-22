@@ -18,9 +18,13 @@
     const perRuolo = Object.fromEntries(ROLES.map(([id]) => [id, { prevista: (prev.ruoli[id] || {}).ore || 0, tariffa: (prev.ruoli[id] || {}).tariffa || 0, svolta: 0 }]));
     const perPersona = Object.fromEntries(Object.entries(prev.persone || {}).map(([p, r]) => [p, { prevista: sum(Object.values(r)), svolta: 0 }]));
     const perSprint = (ore.sprint || []).map((s) => ({ ...s, svolta: 0, voci: 0 }));
+    // ore svolte e previste per persona e per ruolo (la previsione è quella della Dichiarazione degli impegni)
+    const matrice = {};
+    const cella = (p) => (matrice[p] ||= Object.fromEntries(ROLES.map(([id]) => [id, { prevista: ((prev.persone || {})[p] || {})[id] || 0, svolta: 0 }])));
+    Object.keys(prev.persone || {}).forEach(cella);
     let fuoriSprint = 0;
     for (const v of voci) {
-      if (perRuolo[v.ruolo]) perRuolo[v.ruolo].svolta += v.ore;
+      if (perRuolo[v.ruolo]) { perRuolo[v.ruolo].svolta += v.ore; cella(v.persona)[v.ruolo].svolta += v.ore; }
       (perPersona[v.persona] ||= { prevista: 0, svolta: 0 }).svolta += v.ore;
       const s = perSprint.find((x) => x.dal <= v.data && v.data <= x.al);
       if (s) { s.svolta += v.ore; s.voci++; } else fuoriSprint++;
@@ -29,7 +33,7 @@
     const svolta = sum(voci.map((v) => v.ore));
     const costoPrevisto = sum(Object.values(perRuolo).map((r) => r.prevista * r.tariffa));
     const costo = sum(Object.values(perRuolo).map((r) => r.svolta * r.tariffa));
-    return { perRuolo, perPersona, perSprint, prevista, svolta, costoPrevisto, costo, fuoriSprint };
+    return { perRuolo, perPersona, matrice, perSprint, prevista, svolta, costoPrevisto, costo, fuoriSprint };
   }
 
   const csvCell = (v) => { const s = String(v ?? ""); return /[",\n;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
@@ -68,6 +72,20 @@
       <polyline points="${pts}" class="c-real"/>${dots}`;
   }
 
+  /* Ore svolte su ore previste, per persona (righe) e per ruolo (colonne). */
+  function drawMatrix(s) {
+    const cell = (c) => `<td class="n">${num(c.svolta)} <small>/ ${num(c.prevista)}</small></td>`;
+    const tot = (list) => ({ svolta: sum(list.map((c) => c.svolta)), prevista: sum(list.map((c) => c.prevista)) });
+    const people = Object.keys(s.matrice).sort((a, b) => nameOf(a).localeCompare(nameOf(b), "it"));
+    $("ore-matrice-head").innerHTML = `<tr><th scope="col">Componente</th>${ROLES.map(([, label]) => `<th scope="col" class="n">${label}</th>`).join("")}<th scope="col" class="n">Totale</th></tr>`;
+    $("ore-matrice").innerHTML = people.map((p) => {
+      const row = ROLES.map(([id]) => s.matrice[p][id]);
+      return `<tr><th scope="row">${esc(nameOf(p))}</th>${row.map(cell).join("")}${cell(tot(row))}</tr>`;
+    }).join("");
+    const cols = ROLES.map(([id]) => tot(people.map((p) => s.matrice[p][id])));
+    $("ore-matrice-tot").innerHTML = `<tr><th scope="row">Totale</th>${cols.map(cell).join("")}${cell(tot(cols))}</tr>`;
+  }
+
   function draw(ore) {
     const s = summarize(ore), t = today();
     const current = (ore.sprint || []).find((x) => x.dal <= t && t <= x.al);
@@ -82,6 +100,8 @@
 
     $("ore-ruoli").innerHTML = ROLES.map(([id, label]) => { const r = s.perRuolo[id];
       return `<tr><th scope="row">${label}</th><td class="n">${num(r.svolta)}</td><td class="n">${num(r.prevista)}</td><td class="n">${num(Math.max(r.prevista - r.svolta, 0))}</td><td class="n">${euro(r.svolta * r.tariffa)}</td><td class="bar-cell">${bar(r.svolta, r.prevista, `${label}: ${num(r.svolta)} ore su ${num(r.prevista)}`)}</td></tr>`; }).join("");
+
+    drawMatrix(s);
 
     let run = 0;
     const cum = s.perSprint.map((x) => (run += x.svolta));
