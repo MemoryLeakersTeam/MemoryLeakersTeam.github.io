@@ -74,7 +74,11 @@
 
   /* Ore svolte su ore previste, per persona (righe) e per ruolo (colonne). */
   function drawMatrix(s) {
-    const cell = (c) => `<td class="n">${num(c.svolta)} <small>/ ${num(c.prevista)}</small></td>`;
+    // ore svolte / previste · residue; se le ore svolte superano le previste la cella è evidenziata e mostra l'eccedenza
+    const cell = (c) => {
+      const over = c.svolta > c.prevista;
+      return `<td class="n${over ? " over" : ""}">${num(c.svolta)} <small>/ ${num(c.prevista)} · ${over ? `${num(c.svolta - c.prevista)} oltre` : `${num(c.prevista - c.svolta)} residue`}</small></td>`;
+    };
     const tot = (list) => ({ svolta: sum(list.map((c) => c.svolta)), prevista: sum(list.map((c) => c.prevista)) });
     const people = Object.keys(s.matrice).sort((a, b) => nameOf(a).localeCompare(nameOf(b), "it"));
     $("ore-matrice-head").innerHTML = `<tr><th scope="col">Componente</th>${ROLES.map(([, label]) => `<th scope="col" class="n">${label}</th>`).join("")}<th scope="col" class="n">Totale</th></tr>`;
