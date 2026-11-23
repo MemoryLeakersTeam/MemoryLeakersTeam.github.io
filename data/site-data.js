@@ -54,6 +54,14 @@ window.SITE_DATA = {
           "url": "pdf/rtb/verbali_esterni/2026-11-13-vargroup-signed.pdf",
           "sorgente": "RTB/Verbali_esterni/2026-11-13-vargroup.typ",
           "versione": "1.0.0"
+        },
+        {
+          "cat": "Verbali interni",
+          "name": "Verbale interno 17/11/2026",
+          "date": "2026-11-17",
+          "url": "pdf/rtb/verbali_interni/2026-11-17.pdf",
+          "sorgente": "RTB/Verbali_interni/2026-11-17.typ",
+          "versione": "1.0.0"
         }
       ],
       "visible": true
