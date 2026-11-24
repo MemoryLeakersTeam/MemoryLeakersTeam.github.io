@@ -57,7 +57,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Verbali interni",
-          "name": "Verbale interno 17/11/2026",
+          "name": "Verbale interno 2026-11-17",
           "date": "2026-11-17",
           "url": "pdf/rtb/verbali_interni/2026-11-17.pdf",
           "sorgente": "RTB/Verbali_interni/2026-11-17.typ",
@@ -65,7 +65,7 @@ window.SITE_DATA = {
         },
         {
           "cat": "Diapositive",
-          "name": "Diario di bordo 23/11/2026",
+          "name": "Diario di bordo 2026-11-23",
           "date": "2026-11-23",
           "url": "pdf/rtb/diario_di_bordo/2026-11-23.pdf",
           "sorgente": "RTB/Diario_di_bordo/2026-11-23.pdf",
