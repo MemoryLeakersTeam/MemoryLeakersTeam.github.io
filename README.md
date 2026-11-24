@@ -35,7 +35,7 @@ Aprire `/admin` (link «Area riservata» nel footer). Serve un token personale d
 
 ## Ore produttive
 
-La pagina pubblica `/ore` mostra le ore svolte da ciascun componente, per ruolo e per sprint, contro il preventivo della Dichiarazione degli impegni (651 ore, 12.865 €), e permette di scaricare un CSV per sprint da usare nel Piano di Progetto. I dati stanno in `data/ore.json`, separato da `site-data.js` così non interferisce con la sincronizzazione dei documenti.
+La pagina pubblica `/ore` mostra le ore svolte da ciascun componente, per ruolo, per persona e ruolo (ore svolte, previste e residue) e per sprint, contro il preventivo della Dichiarazione degli impegni (651 ore, 12.865 €), e permette di scaricare un CSV per sprint da usare nel Piano di Progetto. I dati stanno in `data/ore.json`, separato da `site-data.js` così non interferisce con la sincronizzazione dei documenti.
 
 **Regole d'uso** (da riportare anche nel Way of Working):
 
