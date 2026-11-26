@@ -70,6 +70,14 @@ window.SITE_DATA = {
           "url": "pdf/rtb/diario_di_bordo/2026-11-23.pdf",
           "sorgente": "RTB/Diario_di_bordo/2026-11-23.pdf",
           "versione": "ec6830c8"
+        },
+        {
+          "cat": "Verbali esterni",
+          "name": "Verbale esterno 2026-11-18 Var Group firmato",
+          "date": "2026-11-18",
+          "url": "pdf/rtb/verbali_esterni/2026-11-18-vargroup-signed.pdf",
+          "sorgente": "RTB/Verbali_esterni/2026-11-18-vargroup.typ",
+          "versione": "1.0.0"
         }
       ],
       "visible": true
